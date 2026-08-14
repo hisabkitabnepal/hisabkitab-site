@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact | Hisab Kitab</title>
+<meta name="description" content="Get in touch with Hisab Kitab over WhatsApp, email, or in person in Kathmandu.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a href="index.html" class="brand"><svg class="seal-mini" width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><circle cx="15" cy="15" r="13" fill="none" stroke="currentColor" stroke-width="1.4"/><text x="15" y="18" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="currentColor">HK</text></svg> Hisab Kitab</a>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="about.html">About</a>
+        <a href="contact.html" class="active">Contact</a>
+        <a href="https://wa.me/9770000000000" target="_blank" rel="noopener">WhatsApp Us</a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">&#9776;</button>
+    </div>
+  </header>
+  
+  <section class="page-hero">
+    <div class="wrap">
+      <span class="eyebrow">Contact</span>
+      <h1>Let's sort your hisab kitab</h1>
+      <p class="lede">Fastest way to reach us is WhatsApp — send your question or your PAN number and we'll get back to you the same day.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap grid-3">
+      <div class="card">
+        <h3>WhatsApp</h3>
+        <p class="muted">Quickest response, most clients start here.</p>
+        <a href="https://wa.me/9770000000000" target="_blank" rel="noopener" class="link" style="color:var(--seal-green);">+977-XXXXXXXXXX &rarr;</a>
+      </div>
+      <div class="card">
+        <h3>Email</h3>
+        <p class="muted">For documents or longer questions.</p>
+        <a href="mailto:hello@hisabkitabnepal.com.np" class="link" style="color:var(--seal-green);">hello@hisabkitabnepal.com.np &rarr;</a>
+      </div>
+      <div class="card">
+        <h3>Office</h3>
+        <p class="muted">Kathmandu, Nepal</p>
+        <span class="link" style="color:var(--text-muted);">By appointment</span>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div>
+          <h4>Hisab Kitab</h4>
+          <p style="color:#C9D2E0; max-width:32ch; font-size:0.95rem;">Tax filing, audits, registrations and business consulting for Nepali businesses — everything reconciled, on time.</p>
+        </div>
+        <div>
+          <h4>Quick Links</h4>
+          <a href="services.html">Services</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div>
+          <h4>Reach Us</h4>
+          <a href="https://wa.me/9770000000000" target="_blank" rel="noopener">WhatsApp: +977-XXXXXXXXXX</a>
+          <a href="mailto:hello@hisabkitabnepal.com.np">hello@hisabkitabnepal.com.np</a>
+          <a href="#">Kathmandu, Nepal</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; <span id="year"></span> Hisab Kitab. All rights reserved.</span>
+        <span>hisabkitabnepal.com.np</span>
+      </div>
+    </div>
+  </footer>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    if (navToggle) navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  </script>
+</body>
+</html>
