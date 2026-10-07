@@ -1,0 +1,5 @@
+import { z } from "zod";
+export const inquirySchema = z.object({
+  id: z.string().uuid(), name: z.string().trim().min(2, "Please provide your full name.").max(100), email: z.string().trim().max(254).refine(v=>!v||z.string().email().safeParse(v).success,"Please provide a valid email address."), phone: z.string().trim().max(30).refine(v=>!v||(/^[+\d() .-]+$/.test(v)&&v.replace(/\D/g,"").length>=6),"Please provide a valid contact number."), business: z.string().trim().max(160),
+  service: z.enum(["accounting", "tax", "reporting", "registration", "audit", "closure", "not-sure"]), stage: z.enum(["starting", "running", "reviewing", "closing"]), plan: z.enum(["essentials", "growth", "custom", "not-sure"]).default("not-sure"), message: z.string().trim().max(3000), website: z.string().max(0, "Please leave the website field empty."), consent: z.literal(true, { errorMap: () => ({ message: "Please agree to be contacted about your inquiry." }) }),
+}).strict().refine(v=>Boolean(v.email||v.phone),{message:"Please provide a phone number or email so we can respond.",path:["phone"]});
