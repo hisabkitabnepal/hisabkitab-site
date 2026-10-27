@@ -1,0 +1,5 @@
+import { PageFrame, PageIntro } from "@/components/site-sections";
+import { RegistrationGuide } from "@/components/registration-guide";
+import { pageMetadata } from "@/lib/seo";
+export const metadata=pageMetadata("Register a Business: Structures, Tax & Requirements","Compare sole proprietorship, partnership and private limited options. Understand tax, preparation documents, registration steps and costs before your free consultation.","/register-business");
+export default function RegisterBusiness(){return <PageFrame><div className="registration-page"><PageIntro eyebrow="Business registration" title={<>Register your<br/><span>business.</span></>} description="Choose a suitable structure, understand tax and prepare for registration. Start with your plans below."/><nav className="service-anchor-nav container" aria-label="Registration guide"><a href="#choose">Help me choose</a><a href="#compare">Compare structures</a><a href="#tax">Compare tax</a><a href="#requirements">Requirements</a><a href="#steps">Process</a><a href="#costs">Costs & consultation</a></nav><div className="container"><RegistrationGuide/></div></div></PageFrame>;}

@@ -1,0 +1,319 @@
+{
+  "notes-on-running-a-business-in-nepal": {
+    "title": "Notes on running a business in Nepal.",
+    "cat": "Insights",
+    "date": "27 Oct, 2026",
+    "lead": "Five habits that keep a small business organized, compliant and easier to grow.",
+    "secs": [
+      {
+        "h": "Keep business and personal money apart",
+        "p": [
+          "Open a separate bank account for the business on day one. When the two are mixed, profit is hard to see and harder to prove to a bank, an auditor or the tax office.",
+          "Pay yourself on a regular schedule instead of dipping into the account when you need cash. It keeps the books honest and makes every month comparable."
+        ]
+      },
+      {
+        "h": "Record every sale and cost as it happens",
+        "p": [
+          "A weekly habit beats a year-end scramble. Keep bills, receipts and bank statements in one place and enter them while you still remember what they were for.",
+          "Clean records also make every other task faster, from VAT returns to the annual filing."
+        ]
+      },
+      {
+        "h": "Know your deadlines",
+        "p": [
+          "The fiscal year runs from mid-July to mid-July. VAT returns, tax installments and annual filings each have their own dates, and late filing usually costs money.",
+          "Put the dates in a shared calendar, with a reminder a week before each one."
+        ]
+      },
+      {
+        "h": "Look at your numbers every month",
+        "p": [
+          "Check four things: sales, costs, profit, and what customers still owe you. A short monthly summary is enough to spot a problem while it is still small."
+        ]
+      },
+      {
+        "h": "Ask before you act",
+        "p": [
+          "Changing your structure, hiring your first employee or closing the business each carry tax and compliance consequences. A short conversation beforehand is cheaper than fixing it afterwards."
+        ]
+      }
+    ],
+    "note": "General information only, not tax or legal advice. Rules and rates change, so check what applies to you before you act."
+  },
+  "a-plain-language-guide-to-registering-a-business": {
+    "title": "A plain-language guide to registering a business",
+    "cat": "Registration",
+    "date": "20 Oct, 2026",
+    "lead": "What registration involves, in the order it usually happens.",
+    "secs": [
+      {
+        "h": "Choose the structure",
+        "p": [
+          "Most small businesses pick between a sole proprietorship and a private limited company. Joint ventures and organizations exist for other situations.",
+          "The choice affects liability, tax and paperwork, so make it before you file anything. Our article on sole proprietorships and companies walks through the trade-offs."
+        ]
+      },
+      {
+        "h": "Prepare the name and documents",
+        "p": [
+          "You will usually need a proposed name, identity documents for the owners or directors, the business address, a short statement of what the business will do, and details of capital.",
+          "Having these ready and consistent across every form avoids the most common cause of delays: small mismatches that send an application back."
+        ]
+      },
+      {
+        "h": "File with the right office",
+        "p": [
+          "Companies register with the Office of the Company Registrar. Other structures register with the relevant government office for that type of business.",
+          "Processing time varies, so it helps to have someone who knows what each office checks."
+        ]
+      },
+      {
+        "h": "Get your PAN and tax registration",
+        "p": [
+          "After registration you need a Permanent Account Number from the tax office, and VAT registration if your business falls under it. Both are needed before you can issue proper invoices."
+        ]
+      },
+      {
+        "h": "Set up banking and books",
+        "p": [
+          "Open a business bank account and set up your accounting before the first sale, not after. It is much easier to keep clean records from the start than to rebuild them later."
+        ]
+      }
+    ],
+    "note": "General information only, not tax or legal advice. Rules and rates change, so check what applies to you before you act."
+  },
+  "sole-proprietorship-or-company": {
+    "title": "Sole proprietorship or company? How to choose",
+    "cat": "Registration",
+    "date": "13 Oct, 2026",
+    "lead": "What each structure means for tax, paperwork and growth.",
+    "secs": [
+      {
+        "h": "Liability",
+        "p": [
+          "A sole proprietorship has no separate legal identity. You and the business are the same person in law, so business debts can reach your personal assets.",
+          "A company is a separate legal entity, and an owner’s risk is generally limited to what they put in. That protection is the main reason many owners choose a company as they grow."
+        ]
+      },
+      {
+        "h": "Tax",
+        "p": [
+          "Companies are taxed at a general company rate, which our calculator shows as 25 percent. Sole proprietors are taxed on profit at individual slab rates.",
+          "Which is lower depends on your profit, so run both before deciding. The tax calculator on this site gives a first look."
+        ]
+      },
+      {
+        "h": "Paperwork and compliance",
+        "p": [
+          "A sole proprietorship is lighter to run. A company has more to maintain: annual returns, financial statements, an audit and formal records.",
+          "The extra work is manageable with a routine, but it should be a conscious choice and not a surprise."
+        ]
+      },
+      {
+        "h": "Growth and funding",
+        "p": [
+          "Partners, investors and larger customers generally find a company easier to deal with. Banks often prefer it too, because ownership and accounts are clearer."
+        ]
+      },
+      {
+        "h": "A simple way to decide",
+        "p": [
+          "Starting small with one owner and little risk usually points to a sole proprietorship. Planning to hire, bring in partners or take on larger contracts usually points to a company. If you are between the two, talk to us before you register."
+        ]
+      }
+    ],
+    "note": "General information only, not tax or legal advice. Rules and rates change, so check what applies to you before you act."
+  },
+  "vat-returns-what-to-keep-ready": {
+    "title": "VAT returns: what to keep ready every month",
+    "cat": "Compliance",
+    "date": "6 Oct, 2026",
+    "lead": "The records that make filing quick and the mistakes that slow it down.",
+    "secs": [
+      {
+        "h": "What you file",
+        "p": [
+          "VAT-registered businesses file a return for each month, generally within 25 days of the month end. The return reports VAT collected on sales and VAT paid on purchases.",
+          "The standard rate is 13 percent, and the difference between the two sides is what you pay or carry forward."
+        ]
+      },
+      {
+        "h": "Sales records",
+        "p": [
+          "Keep every tax invoice you issue, in number order with no gaps, and any credit notes. Each invoice should show your PAN, the customer, the amount and the VAT."
+        ]
+      },
+      {
+        "h": "Purchase records",
+        "p": [
+          "To claim VAT on a purchase you need a valid tax invoice in the business name with your PAN. A plain receipt usually does not qualify.",
+          "Ask suppliers for the right invoice at the time of purchase. It is hard to fix later."
+        ]
+      },
+      {
+        "h": "Reconcile before you file",
+        "p": [
+          "Match your books to the bank statement and check that every invoice sits in the right month. Most filing errors are timing errors, such as a bill entered in the wrong period."
+        ]
+      },
+      {
+        "h": "Mistakes that slow things down",
+        "p": [
+          "The common ones are missing invoices, wrong period, personal expenses mixed in, and filing late. A short monthly checklist prevents nearly all of them."
+        ]
+      }
+    ],
+    "note": "General information only, not tax or legal advice. Rules and rates change, so check what applies to you before you act."
+  },
+  "what-tax-clearance-means": {
+    "title": "What tax clearance means and when you need it",
+    "cat": "Compliance",
+    "date": "29 Sep, 2026",
+    "lead": "A short explanation of the certificate and the situations that call for it.",
+    "secs": [
+      {
+        "h": "What it is",
+        "p": [
+          "A tax clearance certificate confirms that your returns are filed and your tax is settled up to a given period. It is evidence that you are in good standing with the tax office."
+        ]
+      },
+      {
+        "h": "When it comes up",
+        "p": [
+          "It is commonly asked for when closing or transferring a business, applying for certain licenses or renewals, bidding for contracts, and in some financing and ownership changes. Requirements differ by situation, so check with the party asking."
+        ]
+      },
+      {
+        "h": "What gets checked",
+        "p": [
+          "The office looks at whether returns are filed for the period, whether the tax shown has been paid, and whether the figures are consistent. Missing or late filings are the most common reason for delay."
+        ]
+      },
+      {
+        "h": "How to make it easier",
+        "p": [
+          "Keep returns current throughout the year and keep your records organized. If there are gaps from earlier years, fix them first, since clearance cannot be given over unresolved periods."
+        ]
+      }
+    ],
+    "note": "General information only, not tax or legal advice. Rules and rates change, so check what applies to you before you act."
+  },
+  "reading-your-monthly-numbers": {
+    "title": "Reading your monthly numbers",
+    "cat": "Accounting",
+    "date": "22 Sep, 2026",
+    "lead": "How to look at a management summary and spot what needs attention.",
+    "secs": [
+      {
+        "h": "Start with profit",
+        "p": [
+          "Look at the bottom line first: sales minus costs for the month. Then compare it with the last few months instead of reading it alone. A trend tells you more than a single figure."
+        ]
+      },
+      {
+        "h": "Sales against costs",
+        "p": [
+          "If sales grew but profit did not, costs grew faster. Find which cost lines moved the most. Rent and salaries rarely change, so the surprise is usually in purchases or one-off items."
+        ]
+      },
+      {
+        "h": "Money owed to you",
+        "p": [
+          "Profit is not cash. A sale that has not been paid is still on your books as a receivable. If that number keeps growing, you may be profitable on paper and short of cash in practice."
+        ]
+      },
+      {
+        "h": "Money you owe",
+        "p": [
+          "Check supplier bills and tax payments due. Knowing what is coming in the next month lets you plan cash and avoid late fees."
+        ]
+      },
+      {
+        "h": "Questions worth asking each month",
+        "p": [
+          "Which cost is higher than usual? Which customers are late? Is anything missing from the books? If an answer is unclear, ask your accountant while the month is still fresh."
+        ]
+      }
+    ],
+    "note": "General information only, not tax or legal advice. Rules and rates change, so check what applies to you before you act."
+  },
+  "preparing-for-your-audit": {
+    "title": "Preparing for your audit",
+    "cat": "Audit",
+    "date": "15 Sep, 2026",
+    "lead": "A year-end checklist for getting records in order before the auditor arrives.",
+    "secs": [
+      {
+        "h": "Start early",
+        "p": [
+          "The audit goes faster when records are ready before the auditor asks. Begin a few weeks before year end, not after the auditor’s first email."
+        ]
+      },
+      {
+        "h": "Core records",
+        "p": [
+          "Gather the ledgers, sales and purchase invoices, bank statements, VAT returns, payroll records and tax payment receipts for the year. Check that they agree with each other."
+        ]
+      },
+      {
+        "h": "Reconcile the key accounts",
+        "p": [
+          "Reconcile every bank account to the statement at year end, and match what customers owe and what you owe suppliers to the underlying documents."
+        ]
+      },
+      {
+        "h": "Stock and fixed assets",
+        "p": [
+          "Count stock at year end and keep the count sheets. List your fixed assets with purchase dates and costs. Auditors always ask for both."
+        ]
+      },
+      {
+        "h": "Expect follow-up questions",
+        "p": [
+          "Auditors ask about large or unusual items. Have a short explanation and the supporting document ready for each one."
+        ]
+      }
+    ],
+    "note": "General information only, not tax or legal advice. Rules and rates change, so check what applies to you before you act."
+  },
+  "closing-a-business-properly": {
+    "title": "Closing a business properly",
+    "cat": "Closure",
+    "date": "8 Sep, 2026",
+    "lead": "The steps owners often skip, and why a dormant business still has obligations.",
+    "secs": [
+      {
+        "h": "A dormant business is not a closed business",
+        "p": [
+          "Stopping trading does not end your obligations. Returns, filings and fees can keep accruing on a registered business even when there is no activity."
+        ]
+      },
+      {
+        "h": "Settle accounts and tax",
+        "p": [
+          "Finish the books to the closing date, collect or write off what is owed to you, pay what you owe, and file all outstanding returns. Clear tax matters before you apply to close."
+        ]
+      },
+      {
+        "h": "Inform the right offices",
+        "p": [
+          "Companies close through the Office of the Company Registrar, and the tax office must be told as well. Each has its own forms and checks, and they often need each other’s confirmation."
+        ]
+      },
+      {
+        "h": "Employees and contracts",
+        "p": [
+          "Settle final pay and any dues to staff, and end or transfer contracts with suppliers, landlords and customers in writing."
+        ]
+      },
+      {
+        "h": "Keep your records",
+        "p": [
+          "Even after closure, keep your accounting records for the period the law requires. Store them somewhere safe and easy to find."
+        ]
+      }
+    ],
+    "note": "General information only, not tax or legal advice. Rules and rates change, so check what applies to you before you act."
+  }
+}

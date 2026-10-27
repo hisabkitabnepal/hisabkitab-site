@@ -1,0 +1,35 @@
+"use client";
+import { referenceArticles } from "@/lib/reference/articles";
+import { ArticleIcon } from "./ArticleIcon";
+export function ArticleCard({
+  slug,
+  hidden = false,
+}: {
+  slug: string;
+  hidden?: boolean;
+}) {
+  const article = referenceArticles[slug];
+  const open = () => window.location.assign("/blog/" + slug);
+  return (
+    <article
+      data-c={article.cat}
+      data-slug={slug}
+      tabIndex={0}
+      role="link"
+      hidden={hidden}
+      onClick={open}
+      onKeyDown={(e) => {
+        if (e.key === "Enter") open();
+      }}
+    >
+      <i>
+        <ArticleIcon slug={slug} />
+      </i>
+      <small>
+        {article.date} · {article.cat}
+      </small>
+      <h4>{article.title}</h4>
+      <p>{article.lead}</p>
+    </article>
+  );
+}
