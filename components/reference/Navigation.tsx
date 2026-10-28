@@ -1,4 +1,7 @@
+"use client";
+import { usePathname } from "next/navigation";
 import { Logo } from "./Logo";
+import { referencePageFromPath } from "@/lib/reference/navigation";
 
 const menu = [
   ["Business registration", "Structure, documents, filing"],
@@ -9,7 +12,8 @@ const menu = [
   ["Business closure", "Wind down and clear what is owed"],
 ];
 
-export function Navigation({ page }: { page: string }) {
+export function Navigation() {
+  const page = referencePageFromPath(usePathname());
   return (
     <header className="nav" id="nav">
       <a className="logo" href="/" aria-label="Hisab Kitab home">

@@ -1,3 +1,4 @@
+let footerRuns = 0;
 export function entranceMotion({ gsap, ScrollTrigger, rm }, page) {
   if (rm) return;
   var clear = "transform,opacity";
@@ -12,7 +13,7 @@ export function entranceMotion({ gsap, ScrollTrigger, rm }, page) {
         "-=.6",
       )
       .from(
-        "#pg-book form .field, #pg-book form .bk-btn",
+        "#pg-book form .field, #pg-book form .bk-consent, #pg-book form .bk-btn, #pg-book form .form-msg",
         { y: 22, opacity: 0, duration: 0.7, stagger: 0.07 },
         "-=.6",
       );
@@ -60,13 +61,7 @@ export function entranceMotion({ gsap, ScrollTrigger, rm }, page) {
   if (page === "book") bookPage();
   if (page === "calculator") calcPage();
   if (page === "blog") blogPage();
-  gsap.from(".topbar", {
-    y: -14,
-    opacity: 0,
-    duration: 0.5,
-    ease: "power3.out",
-    clearProps: clear,
-  });
+  if (!footerRuns++)
   gsap.from(".site-foot .foot-grid > *", {
     y: 30,
     opacity: 0,

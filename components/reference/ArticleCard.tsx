@@ -1,4 +1,5 @@
 "use client";
+import { useRouter } from "next/navigation";
 import { referenceArticles } from "@/lib/reference/articles";
 import { ArticleIcon } from "./ArticleIcon";
 export function ArticleCard({
@@ -9,7 +10,8 @@ export function ArticleCard({
   hidden?: boolean;
 }) {
   const article = referenceArticles[slug];
-  const open = () => window.location.assign("/blog/" + slug);
+  const router = useRouter();
+  const open = () => router.push("/blog/" + slug);
   return (
     <article
       data-c={article.cat}

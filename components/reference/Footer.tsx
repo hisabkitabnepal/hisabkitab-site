@@ -19,7 +19,7 @@ export function Footer() {
           <h3 className="foot-h">{"Explore"}</h3>
           <ul className="foot-list">
             <li>
-              <a href="/free-consultation">{"Book a call"}</a>
+              <a href="/register-business">{"Register a business"}</a>
             </li>
             <li>
               <a href="/services">{"Services"}</a>

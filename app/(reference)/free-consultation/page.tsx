@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import { resolveReferenceBookingQuery } from "@/lib/reference/booking";
 import { ReferenceLayout } from "@/components/reference/Page";
 import { Booking } from "@/components/reference/Booking";
@@ -20,9 +19,5 @@ async function QueryBooking({ searchParams }: QueryProps) {
   );
 }
 export default function Page({ searchParams }: QueryProps) {
-  return (
-    <Suspense fallback={null}>
-      <QueryBooking searchParams={searchParams} />
-    </Suspense>
-  );
+  return <QueryBooking searchParams={searchParams} />;
 }

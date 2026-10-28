@@ -1,10 +1,12 @@
 "use client";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { referenceArticles } from "@/lib/reference/articles";
 import { ArticleCard } from "./ArticleCard";
 export function Blog() {
   const [filter, setFilter] = useState("all");
-  const open = (slug: string) => window.location.assign("/blog/" + slug);
+  const router = useRouter();
+  const open = (slug: string) => router.push("/blog/" + slug);
   const featured = "notes-on-running-a-business-in-nepal";
   return (
     <section className="pg" id="pg-blog">

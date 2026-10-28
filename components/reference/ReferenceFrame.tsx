@@ -1,34 +1,75 @@
 "use client";
 import { useLayoutEffect, useRef, useState, type ReactNode } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import { mountReferenceMotion } from "./motion/runtime";
-import { referenceHashTarget } from "@/lib/reference/navigation";
+import {
+  referenceHashTarget,
+  referencePageFromPath,
+} from "@/lib/reference/navigation";
 export type ReferencePage =
   "home" | "services" | "about" | "blog" | "article" | "book" | "calculator";
-export function ReferenceFrame({
-  page,
-  children,
-}: {
-  page: ReferencePage;
-  children: ReactNode;
-}) {
+export function ReferenceFrame({ children }: { children: ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
+  const router = useRouter();
+  const page = referencePageFromPath(pathname);
   useLayoutEffect(() => {
+    const el = ref.current!;
+    let dispose = () => {};
+    let dead = false;
     function compatibleHash() {
       const target = referenceHashTarget(location.hash);
       if (target && target !== location.pathname) location.replace(target);
     }
     compatibleHash();
     window.addEventListener("hashchange", compatibleHash);
-    const cleanup = mountReferenceMotion(ref.current!, page);
-    return () => {
-      window.removeEventListener("hashchange", compatibleHash);
-      cleanup();
+    const go = () => {
+      if (dead) return;
+      dispose = mountReferenceMotion(el, page);
+      el.dataset.ready = "1";
     };
-  }, [page]);
+    if (document.fonts.status === "loaded") go();
+    else
+      Promise.race([
+        Promise.all(
+          ["400", "500", "600", "700"].map((w) =>
+            document.fonts.load(`${w} 1em Manrope`),
+          ),
+        ),
+        new Promise((resolve) => setTimeout(resolve, 1200)),
+      ])
+        .catch(() => {})
+        .then(go);
+    return () => {
+      dead = true;
+      window.removeEventListener("hashchange", compatibleHash);
+      dispose();
+      delete el.dataset.ready;
+    };
+  }, [pathname, page]);
   return (
     <div
       className={"reference-page" + (page === "calculator" ? " on-calc" : "")}
       ref={ref}
+      onClick={(e) => {
+        if (
+          e.defaultPrevented ||
+          e.button ||
+          e.metaKey ||
+          e.ctrlKey ||
+          e.shiftKey ||
+          e.altKey
+        )
+          return;
+        const a = (e.target as Element).closest("a");
+        if (!a || a.target || a.hasAttribute("download")) return;
+        const url = new URL(a.href, location.href);
+        if (url.origin !== location.origin) return;
+        if (url.pathname === location.pathname && url.search === location.search)
+          return;
+        e.preventDefault();
+        router.push(url.pathname + url.search + url.hash);
+      }}
     >
       {children}
     </div>

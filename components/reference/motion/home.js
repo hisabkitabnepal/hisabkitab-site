@@ -10,7 +10,7 @@ export function homeMotion({ gsap, rm, scope, listen, cleanup, splitOnce }) {
   gsap
     .timeline({ defaults: { ease: "power4.out" } })
     .timeScale(1.6)
-    .from(".nav", { yPercent: -100, opacity: 0, duration: 0.9 })
+    .to(".nav", { duration: 0.9 })
     .from(
       heroWords,
       { yPercent: 115, rotate: 3, duration: 1.1, stagger: 0.07 },

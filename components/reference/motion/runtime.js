@@ -124,7 +124,7 @@ export function mountReferenceMotion(scope, page) {
     if (page !== "home" || !rows) return;
     const fits =
       getComputedStyle(grid).gridTemplateColumns.split(" ").length > 1 &&
-      input.offsetHeight + 54 + 56 <= innerHeight;
+      input.offsetHeight + 92 + 56 <= innerHeight;
     if (fits) rows.setAttribute("data-lenis-prevent", "");
     else rows.removeAttribute("data-lenis-prevent");
   };
@@ -139,11 +139,27 @@ export function mountReferenceMotion(scope, page) {
   });
   cleanup(() => clearTimeout(resizeTimer));
   const dropdown = scope.querySelector(".has-dd");
+  const menu = dropdown.querySelector(".dd-menu");
   if (dropdown) {
     listen(dropdown, "click", (e) => {
-      const a = e.target.closest(".dd-i");
+      const a = e.target.closest(".dd-i, .has-dd > a");
       if (a) {
-        dropdown.classList.add("shut");
+        menu.style.transition = "none";
+        // Not recorded by the context, so a route change can't revert it and reopen the menu mid-close.
+        owner.ignore(() =>
+          gsap.to(menu, {
+            opacity: 0,
+            y: -8,
+            duration: 0.25,
+            ease: "power2.in",
+            overwrite: true,
+            onComplete: () => {
+              if (dropdown.matches(":hover, :focus-within"))
+                dropdown.classList.add("shut");
+              gsap.set(menu, { clearProps: "opacity,transform,transition" });
+            },
+          }),
+        );
         a.blur();
       }
     });
@@ -154,7 +170,7 @@ export function mountReferenceMotion(scope, page) {
     const service = /^#services-([1-6])$/.exec(hash);
     const target = scope.querySelector(hash);
     if (!target) return;
-    let y = target.getBoundingClientRect().top + scrollY - 54;
+    let y = target.getBoundingClientRect().top + scrollY - 92;
     if (service) {
       const visual = target.querySelector(".sx-v");
       y =

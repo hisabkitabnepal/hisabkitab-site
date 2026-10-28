@@ -13,3 +13,16 @@ export function referenceHashTarget(hash: string): string | null {
   if (/^blog\/[\w-]+$/.test(key)) return "/" + key;
   return null;
 }
+
+export function referencePageFromPath(pathname: string) {
+  if (pathname === "/") return "home" as const;
+  if (pathname.startsWith("/blog/")) return "article" as const;
+  const pages = {
+    "/services": "services",
+    "/about": "about",
+    "/blog": "blog",
+    "/free-consultation": "book",
+    "/tools": "calculator",
+  } as const;
+  return pages[pathname as keyof typeof pages] ?? ("other" as const);
+}

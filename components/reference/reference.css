@@ -4,28 +4,28 @@
   src: url("/fonts/manrope-latin-variable.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
-  font-display: swap;
+  font-display: block;
 }
 @font-face {
   font-family: Manrope;
   src: url("/fonts/manrope-latin-variable.woff2") format("woff2");
   font-weight: 500;
   font-style: normal;
-  font-display: swap;
+  font-display: block;
 }
 @font-face {
   font-family: Manrope;
   src: url("/fonts/manrope-latin-variable.woff2") format("woff2");
   font-weight: 600;
   font-style: normal;
-  font-display: swap;
+  font-display: block;
 }
 @font-face {
   font-family: Manrope;
   src: url("/fonts/manrope-latin-variable.woff2") format("woff2");
   font-weight: 700;
   font-style: normal;
-  font-display: swap;
+  font-display: block;
 }
 :root {
   color-scheme: light;
@@ -2395,9 +2395,7 @@ body::before {
 }
 .foot-h {
   font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  font-weight: 500;
   color: #85858b;
 }
 .foot-list {
@@ -3747,4 +3745,70 @@ main.stack > .faq {
 #pg-book .bk-btn:disabled {
   opacity: 0.6;
   cursor: wait;
+}
+
+.reference-page:not([data-ready]) :is(main, .site-foot),
+.reference-page[data-page="home"]:not([data-ready]) .nav {
+  visibility: hidden;
+  animation: ref-unhide 0s 2s forwards;
+}
+@keyframes ref-unhide {
+  to { visibility: visible; }
+}
+
+:root { --tb: 38px; }
+.topbar {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+}
+.nav { top: calc(var(--tb) + env(safe-area-inset-top, 0px)); }
+.xbar { top: calc(54px + var(--tb)); }
+section[id] { scroll-margin-top: calc(54px + var(--tb)); }
+@media (min-width: 901px) {
+  .sx-l,
+  .ar-l {
+    top: calc(54px + var(--tb));
+    height: calc(100vh - 54px - var(--tb));
+  }
+}
+
+/* ref-chrome: sticky top bar + nav stay put; only page content is gated until motion mounts */
+html {
+  scrollbar-gutter: stable;
+}
+:root {
+  --tb: 38px;
+}
+.topbar {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+}
+.nav {
+  top: calc(var(--tb) + env(safe-area-inset-top, 0px));
+}
+.xbar {
+  top: calc(54px + var(--tb));
+}
+section[id] {
+  scroll-margin-top: calc(54px + var(--tb));
+}
+@media (min-width: 901px) {
+  .sx-l,
+  .ar-l {
+    top: calc(54px + var(--tb));
+    height: calc(100vh - 54px - var(--tb));
+  }
+}
+.reference-page:not([data-ready]) {
+  visibility: visible;
+  animation: none;
+}
+.reference-page:not([data-ready]) :is(main, .site-foot) {
+  visibility: hidden;
+  animation: ref-unhide 0s 2s forwards;
+}
+@keyframes ref-unhide {
+  to {
+    visibility: visible;
+  }
 }
