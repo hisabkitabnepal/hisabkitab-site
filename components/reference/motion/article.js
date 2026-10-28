@@ -12,6 +12,7 @@ export function articleMotion({
   let arTick;
   function startArticle() {
     var root = scope.querySelector("#pg-article");
+    if (!root) return;
     var heads = Array.prototype.slice.call(root.querySelectorAll(".ar-t")),
       secs = Array.prototype.slice.call(root.querySelectorAll(".ar-sec"));
     var k = heads.map(function () {

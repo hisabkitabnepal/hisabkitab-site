@@ -7,7 +7,7 @@ export function Blog() {
   const [filter, setFilter] = useState("all");
   const router = useRouter();
   const open = (slug: string) => router.push("/blog/" + slug);
-  const featured = "notes-on-running-a-business-in-nepal";
+  const featured = "register-a-business-nepal";
   return (
     <section className="pg" id="pg-blog">
       <div className="pg-body">
@@ -22,20 +22,16 @@ export function Blog() {
               if (e.key === "Enter") open(featured);
             }}
           >
-            <small>27 Oct, 2026</small>
+            <small>{referenceArticles[featured].cat}</small>
             <div>
-              <h1>Notes on running a business in Nepal.</h1>
-              <p>
-                Hisab Kitab is a financial and tax consultancy based in
-                Samakhusi, Kathmandu, supporting businesses with organized
-                accounts and practical advice.
-              </p>
+              <h1>{referenceArticles[featured].title}</h1>
+              <p>{referenceArticles[featured].lead}</p>
             </div>
           </article>
           <div className="bs">
             {[
-              "a-plain-language-guide-to-registering-a-business",
-              "sole-proprietorship-or-company",
+              "closing-a-business-nepal",
+              "annual-company-filings-tax-clearance",
             ].map((slug) => (
               <article
                 key={slug}
@@ -58,11 +54,13 @@ export function Blog() {
         <div className="bt">
           {[
             "all",
-            "Registration",
-            "Compliance",
-            "Accounting",
-            "Audit",
-            "Closure",
+            ...Array.from(
+              new Set(
+                Object.keys(referenceArticles)
+                  .slice(3)
+                  .map((slug) => referenceArticles[slug].cat),
+              ),
+            ),
           ].map((cat) => (
             <button
               key={cat}
@@ -78,7 +76,7 @@ export function Blog() {
         </div>
         <div className="bl">
           {Object.keys(referenceArticles)
-            .slice(2)
+            .slice(3)
             .map((slug) => (
               <ArticleCard
                 key={slug}

@@ -1756,7 +1756,7 @@ html.lenis body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: clamp(440px, 40.6vw, 640px);
+  min-height: clamp(400px, 32vw, 500px);
   border-radius: 10px;
   padding: clamp(22px, 2.2vw, 34px);
   color: #fff;
@@ -3106,7 +3106,7 @@ main.stack > .faq {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding-top: clamp(4px, 1.5vh, 16px);
+  padding-top: clamp(8px, 1.5vh, 25px);
 }
 .ar-eb {
   display: flex;
@@ -3129,12 +3129,12 @@ main.stack > .faq {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 4px;
+  gap: 25px;
   max-width: 21em;
 }
 .ar-t {
   text-align: left;
-  font-size: clamp(20px, 2.1vw, 30px);
+  font-size: clamp(18px, 1.7vw, 28px);
   font-weight: 300;
   letter-spacing: -0.04em;
   line-height: 1.08;
@@ -3810,5 +3810,42 @@ section[id] {
 @keyframes ref-unhide {
   to {
     visibility: visible;
+  }
+}
+
+.nav .logo,
+.site-foot .logo {
+  align-items: center;
+  gap: 10px;
+}
+.site-foot .logo {
+  width: fit-content;
+}
+.logo-mark {
+  display: block;
+  height: 32px;
+  width: 32px;
+}
+.site-foot .logo-mark {
+  height: 40px;
+  width: 40px;
+}
+.logo-word {
+  color: var(--navy);
+  white-space: nowrap;
+}
+.nav .logo-word {
+  font-size: 20px;
+}
+@media (max-width: 480px) {
+  .nav .logo {
+    gap: 8px;
+  }
+  .nav .logo-mark {
+    height: 28px;
+    width: 28px;
+  }
+  .nav .logo-word {
+    font-size: 18px;
   }
 }

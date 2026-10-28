@@ -1,11 +1,17 @@
-import { Logo } from "./Logo";
 export function Footer() {
   return (
     <footer className="site-foot">
       <div className="foot-grid">
         <div className="foot-brand">
-          <a href="/" aria-label="Hisab Kitab home">
-            <Logo className="foot-logo" />
+          <a className="logo" href="/" aria-label="Hisab Kitab home">
+            <img
+              className="logo-mark"
+              src="/reference/hk-emblem.webp"
+              alt=""
+              width={40}
+              height={40}
+            />
+            <span className="logo-word">Hisab Kitab</span>
           </a>
           <p className="foot-tag">{"Financial & Tax Consultants"}</p>
           <p className="foot-about">

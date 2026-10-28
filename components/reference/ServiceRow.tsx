@@ -1,5 +1,6 @@
 import { referenceServices } from "@/lib/reference/services";
 import { ServiceMock } from "./ServiceMock";
+const serviceIds = ["registration", "accounting", "tax", "audit", "reporting", "closure"];
 type Props = { service: (typeof referenceServices)[number]; index: number };
 export function ShowcaseCard({ service, index }: Props) {
   return (
@@ -11,7 +12,7 @@ export function ShowcaseCard({ service, index }: Props) {
       <h4>{service.headline}</h4>
       <p>{service.summary}</p>
       <div className="act">
-        <a className="pill dark" href="/free-consultation">
+        <a className="pill dark" href={`/free-consultation?service=${serviceIds[index]}`}>
           Book this service
         </a>
       </div>

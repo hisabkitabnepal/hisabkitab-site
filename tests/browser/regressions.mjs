@@ -17,15 +17,15 @@ try {
   });
   await page.evaluate(() => document.fonts.ready);
   assert.equal(
-    await page.locator(".logo-svg").count(),
+    await page.locator(".nav .logo-mark").count(),
     1,
     "Header uses the reusable, sized reference logo",
   );
   assert.equal(
     await page
-      .locator(".logo-svg")
+      .locator(".nav .logo-mark")
       .evaluate((el) => el.getBoundingClientRect().height),
-    34,
+    32,
   );
   assert.deepEqual(
     await page.evaluate(() =>

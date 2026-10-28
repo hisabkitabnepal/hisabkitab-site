@@ -1,6 +1,5 @@
 "use client";
 import { usePathname } from "next/navigation";
-import { Logo } from "./Logo";
 import { referencePageFromPath } from "@/lib/reference/navigation";
 
 const menu = [
@@ -17,7 +16,14 @@ export function Navigation() {
   return (
     <header className="nav" id="nav">
       <a className="logo" href="/" aria-label="Hisab Kitab home">
-        <Logo className="logo-svg" />
+        <img
+          className="logo-mark"
+          src="/reference/hk-emblem.webp"
+          alt=""
+          width={32}
+          height={32}
+        />
+        <span className="logo-word">Hisab Kitab</span>
       </a>
       <nav className="nav-links" aria-label="Primary">
         <div className="has-dd">
@@ -36,7 +42,7 @@ export function Navigation() {
               {menu.map(([title, description], index) => (
                 <a
                   className="dd-i"
-                  href={`/#services-${index + 1}`}
+                  href={`/services#svp-${index + 1}`}
                   role="menuitem"
                   key={title}
                 >
