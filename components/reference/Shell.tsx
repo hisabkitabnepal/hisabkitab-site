@@ -12,6 +12,7 @@ export function ReferenceShell({ children }: { children: ReactNode }) {
   });
   return (
     <ReferenceFrame>
+      <div className="dots-layer" aria-hidden="true" /> 
       <Topbar />
       <Navigation />
       {children}

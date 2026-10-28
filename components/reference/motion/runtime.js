@@ -115,25 +115,10 @@ export function mountReferenceMotion(scope, page) {
     entranceMotion(runtime, page);
     pillMotion(runtime);
   });
-  // Keep the exact final preview behavior: stack/snap definitions were dormant.
-  // Only overflow inside the result rows is exempted from Lenis when the grid fits.
-  const fitRows = () => {
-    const grid = scope.querySelector(".calc-grid"),
-      input = grid?.querySelector(".inputs"),
-      rows = grid?.querySelector("#resRows");
-    if (page !== "home" || !rows) return;
-    const fits =
-      getComputedStyle(grid).gridTemplateColumns.split(" ").length > 1 &&
-      input.offsetHeight + 92 + 56 <= innerHeight;
-    if (fits) rows.setAttribute("data-lenis-prevent", "");
-    else rows.removeAttribute("data-lenis-prevent");
-  };
-  fitRows();
   let resizeTimer;
   listen(window, "resize", () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
-      fitRows();
       ScrollTrigger.refresh();
     }, 250);
   });
@@ -209,11 +194,12 @@ export function mountReferenceMotion(scope, page) {
     cleanup(() => clearTimeout(anchorTimer));
   }
   // Dotted backdrop opacity follows the calculator/contact coverage of the viewport.
-  const html = document.documentElement,
-    oldDf = html.style.getPropertyValue("--df");
+  // Drives a single fixed layer's opacity (composited) instead of a page-wide custom property.
+  const layer = document.querySelector(".dots-layer");
   let raf = 0;
   function paintDots() {
     raf = 0;
+    if (!layer) return;
     const z0 = innerHeight * 0.4,
       z1 = innerHeight * 1.2;
     let coverage = 0;
@@ -224,7 +210,7 @@ export function mountReferenceMotion(scope, page) {
         Math.max(0, Math.min(b.bottom, z1) - Math.max(b.top, z0)) / (z1 - z0),
       );
     });
-    html.style.setProperty("--df", String(Math.max(0, 1 - coverage * 1.4)));
+    layer.style.opacity = String(Math.max(0, 1 - coverage * 1.4));
   }
   const queueDots = () => {
     if (!raf) raf = requestAnimationFrame(paintDots);
@@ -235,8 +221,7 @@ export function mountReferenceMotion(scope, page) {
   paintDots();
   cleanup(() => {
     cancelAnimationFrame(raf);
-    if (oldDf) html.style.setProperty("--df", oldDf);
-    else html.style.removeProperty("--df");
+    if (layer) layer.style.opacity = "";
   });
   ScrollTrigger.refresh();
   let alive = true;

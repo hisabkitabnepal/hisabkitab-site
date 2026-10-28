@@ -33,28 +33,45 @@ function Highlight({
   useLayoutEffect(() => {
     const el = ref.current!,
       parent = el.parentElement!;
-    function paint() {
+    let placed = false;
+    function paint(animate: boolean) {
       const active =
         parent.querySelector<HTMLInputElement>(selector)?.parentElement;
-      if (active)
-        Object.assign(el.style, {
-          left: active.offsetLeft + "px",
-          top: active.offsetTop + "px",
-          width: active.offsetWidth + "px",
-          height: active.offsetHeight + "px",
+      if (!active) return;
+      const box = {
+        left: active.offsetLeft,
+        top: active.offsetTop,
+        width: active.offsetWidth,
+        height: active.offsetHeight,
+      };
+      const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (!animate || !placed || still) {
+        gsap.killTweensOf(el);
+        gsap.set(el, box);
+      } else {
+        gsap.to(el, {
+          ...box,
+          duration: 0.5,
+          ease: "power3.inOut",
+          overwrite: true,
         });
+      }
+      placed = true;
     }
-    paint();
-    const observer = new ResizeObserver(paint);
+    paint(false);
+    const observer = new ResizeObserver(() => paint(false));
     observer.observe(parent);
-    parent.addEventListener("change", paint);
+    const onChange = () => paint(true);
+    parent.addEventListener("change", onChange);
     return () => {
+      gsap.killTweensOf(el);
       observer.disconnect();
-      parent.removeEventListener("change", paint);
+      parent.removeEventListener("change", onChange);
     };
   }, [selector]);
   return <span className={className} ref={ref} />;
 }
+
 export function Calculator({ standalone = false }: { standalone?: boolean }) {
   const [turnover, setTurnover] = useState("45,00,000"),
     [profit, setProfit] = useState("18,00,000");
@@ -62,6 +79,10 @@ export function Calculator({ standalone = false }: { standalone?: boolean }) {
       useState<EstimateInput["structure"]>("company"),
     [period, setPeriod] = useState<EstimateInput["period"]>(1),
     [adjustment, setAdjustment] = useState(0);
+  const [slide, setSlide] = useState(0);
+  const slideRef = useRef(0),
+    adjustmentRef = useRef(0),
+    glide = useRef<gsap.core.Tween | null>(null);
   const [errors, setErrors] = useState({ turnover: false, profit: "" });
   const [result, setResult] = useState(() => estimateReferenceTax(initial));
   const [countRequest, setCountRequest] = useState(0);
@@ -164,6 +185,32 @@ export function Calculator({ standalone = false }: { standalone?: boolean }) {
     });
     setResult(next);
     if (animate) setCountRequest((n) => n + 1);
+  }
+    function commit(v: number) {
+    slideRef.current = v;
+    setSlide(v);
+    const r = Math.round(v);
+    if (r !== adjustmentRef.current) {
+      adjustmentRef.current = r;
+      setAdjustment(r);
+      calculate({ adjustment: r }, false);
+    }
+  }
+  function glideTo(target: number) {
+    glide.current?.kill();
+    const to = Math.max(-20, Math.min(20, target));
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      commit(to);
+      return;
+    }
+    const o = { v: slideRef.current };
+    glide.current = gsap.to(o, {
+      v: to,
+      duration: 0.3,
+      ease: "power3.out",
+      onUpdate: () => commit(o.v),
+      onComplete: () => commit(to),
+    });
   }
   const input = (value: string) => {
     const raw = value.replace(/[^\d]/g, "");
@@ -277,7 +324,7 @@ export function Calculator({ standalone = false }: { standalone?: boolean }) {
                 NPR {fmt(result.total)}
               </div>
             </div>
-            <div className="rows" id="resRows" ref={rows}>
+            <div className="rows" id="resRows" ref={rows} data-lenis-prevent="">
               {result.rows.map(([label, value], i) => (
                 <div key={label + "-" + i}>
                   <span>{label}</span>
@@ -382,24 +429,33 @@ export function Calculator({ standalone = false }: { standalone?: boolean }) {
                   {adjText}
                 </span>
               </div>
-              <input
+                            <input
                 id="adj"
                 type="range"
                 min="-20"
                 max="20"
-                step="1"
-                value={adjustment}
+                step="0.01"
+                value={slide}
                 aria-valuetext={adjText}
                 style={
                   {
-                    "--a": Math.min(50, ((adjustment + 20) / 40) * 100) + "%",
-                    "--b": Math.max(50, ((adjustment + 20) / 40) * 100) + "%",
+                    "--a": Math.min(50, ((slide + 20) / 40) * 100) + "%",
+                    "--b": Math.max(50, ((slide + 20) / 40) * 100) + "%",
                   } as CSSProperties
                 }
-                onChange={(e) => {
-                  const value = Number(e.target.value);
-                  setAdjustment(value);
-                  calculate({ adjustment: value }, false);
+                onPointerDown={() => glide.current?.kill()}
+                onChange={(e) => commit(Number(e.target.value))}
+                onPointerUp={() => glideTo(Math.round(slideRef.current))}
+                onKeyDown={(e) => {
+                  const d =
+                    e.key === "ArrowRight" || e.key === "ArrowUp"
+                      ? 1
+                      : e.key === "ArrowLeft" || e.key === "ArrowDown"
+                        ? -1
+                        : 0;
+                  if (!d) return;
+                  e.preventDefault();
+                  glideTo(Math.round(slideRef.current) + d);
                 }}
               />
               <div className="adj-ticks" aria-hidden="true">

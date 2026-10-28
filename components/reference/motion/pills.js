@@ -5,6 +5,7 @@ export function pillMotion({ gsap, rm, scope, listen, cleanup }) {
     outline: { fill: "#0f2b3f", text: "#ffffff" },
     light: { fill: "#1e2939", text: "#ffffff" },
   };
+  var CARDS = "#pg-blog .bs article, #pg-blog .bl article";
   function kind(p) {
     return p.classList.contains("dark")
       ? "dark"
@@ -14,30 +15,48 @@ export function pillMotion({ gsap, rm, scope, listen, cleanup }) {
           ? "outline"
           : null;
   }
-  function fillOf(p) {
-    if (!p._f) {
-      p._f = document.createElement("span");
-      p._f.className = "pill-fill";
-      p._f.setAttribute("aria-hidden", "true");
-      p.insertBefore(p._f, p.firstChild);
-      p._base = getComputedStyle(p).color;
+  // Resolve what the pointer is over: a pill, a side card, or a grid card (its icon tile fills).
+  function targetOf(e) {
+    var el = e.target.closest && e.target.closest(".pill, " + CARDS);
+    if (!el || (e.relatedTarget && el.contains(e.relatedTarget))) return null;
+    if (el.classList.contains("pill")) {
+      var k = kind(el);
+      return k
+        ? { trigger: el, host: el, fill: C[k].fill, text: C[k].text, pill: true }
+        : null;
+    }
+    var host = el.matches("#pg-blog .bl article") ? el.querySelector("i") : el;
+    return host
+      ? { trigger: el, host: host, fill: "#1e2939", pill: false }
+      : null;
+  }
+  function fillOf(h, trigger) {
+    if (!h._f) {
+      h._f = document.createElement("span");
+      h._f.className = "pill-fill";
+      h._f.setAttribute("aria-hidden", "true");
+      h.insertBefore(h._f, h.firstChild);
+      h._base = getComputedStyle(h).color;
+      h._trigger = trigger;
       cleanup(() => {
-        p._f?.remove();
-        delete p._f;
-        delete p._base;
-        p.classList.remove("hov");
+        h._f?.remove();
+        delete h._f;
+        delete h._base;
+        h._trigger?.classList.remove("hov");
+        delete h._trigger;
       });
     }
-    return p._f;
+    return h._f;
   }
-  function pos(p, e) {
-    var r = p.getBoundingClientRect();
-    return {
-      x: e.clientX - r.left,
-      y: e.clientY - r.top,
-      w: r.width,
-      h: r.height,
-    };
+  function pos(h, e, clamp) {
+    var r = h.getBoundingClientRect(),
+      x = e.clientX - r.left,
+      y = e.clientY - r.top;
+    if (clamp) {
+      x = Math.max(0, Math.min(r.width, x));
+      y = Math.max(0, Math.min(r.height, y));
+    }
+    return { x: x, y: y, w: r.width, h: r.height };
   }
   function reach(o) {
     return (
@@ -51,46 +70,45 @@ export function pillMotion({ gsap, rm, scope, listen, cleanup }) {
       0.5
     );
   }
-  function pillOf(e) {
-    var p = e.target.closest && e.target.closest(".pill");
-    if (!p || (e.relatedTarget && p.contains(e.relatedTarget)) || !kind(p))
-      return null;
-    return p;
-  }
   listen(scope, "mouseover", function (e) {
-    var p = pillOf(e);
-    if (!p) return;
-    var c = C[kind(p)],
-      f = fillOf(p),
-      o = pos(p, e);
+    var t = targetOf(e);
+    if (!t) return;
+    var h = t.host,
+      f = fillOf(h, t.trigger),
+      o = pos(h, e, !t.pill);
     f._s = reach(o);
-    p.classList.add("hov");
+    t.trigger.classList.add("hov");
     gsap.killTweensOf(f);
-    gsap.killTweensOf(p, "color");
-    gsap.set(f, { x: o.x, y: o.y, backgroundColor: c.fill });
+    gsap.set(f, { x: o.x, y: o.y, backgroundColor: t.fill });
     gsap.fromTo(
       f,
       { scale: 0 },
       { scale: f._s, duration: rm ? 0 : 0.6, ease: "power3.out" },
     );
-    gsap.to(p, {
-      color: c.text,
-      duration: rm ? 0 : 0.3,
-      delay: rm ? 0 : 0.1,
-      ease: "power2.out",
-    });
+    if (t.pill) {
+      gsap.killTweensOf(h, "color");
+      gsap.to(h, {
+        color: t.text,
+        duration: rm ? 0 : 0.3,
+        delay: rm ? 0 : 0.1,
+        ease: "power2.out",
+      });
+    }
   });
   listen(scope, "mouseout", function (e) {
-    var p = pillOf(e);
-    if (!p || !p._f) return;
-    var f = p._f,
-      o = pos(p, e),
+    var t = targetOf(e);
+    if (!t || !t.host._f) return;
+    var h = t.host,
+      f = h._f,
+      o = pos(h, e, !t.pill),
       cur = gsap.getProperty(f, "scale");
-    p.classList.remove("hov");
+    t.trigger.classList.remove("hov");
     gsap.killTweensOf(f);
-    gsap.killTweensOf(p, "color");
     if (cur >= f._s * 0.98) gsap.set(f, { x: o.x, y: o.y, scale: reach(o) });
     gsap.to(f, { scale: 0, duration: rm ? 0 : 0.5, ease: "power3.inOut" });
-    gsap.to(p, { color: p._base, duration: rm ? 0 : 0.3, ease: "power2.out" });
+    if (t.pill) {
+      gsap.killTweensOf(h, "color");
+      gsap.to(h, { color: h._base, duration: rm ? 0 : 0.3, ease: "power2.out" });
+    }
   });
 }
