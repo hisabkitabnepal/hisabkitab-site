@@ -324,7 +324,7 @@ export function Calculator({ standalone = false }: { standalone?: boolean }) {
                 NPR {fmt(result.total)}
               </div>
             </div>
-            <div className="rows" id="resRows" ref={rows} data-lenis-prevent="">
+            <div className="rows" id="resRows" ref={rows}>
               {result.rows.map(([label, value], i) => (
                 <div key={label + "-" + i}>
                   <span>{label}</span>

@@ -2,6 +2,7 @@ import {
   referenceArticles,
   relatedArticles,
   readingMinutes,
+  articleCoverStyle,
 } from "@/lib/reference/articles";
 import { ArticleCard } from "./ArticleCard";
 export function Article({ slug }: { slug: string }) {
@@ -9,7 +10,7 @@ export function Article({ slug }: { slug: string }) {
   return (
     <section className="pg" id="pg-article">
       <div className="ar-top">
-        <div className="ar-hero">
+        <div className="ar-hero" style={articleCoverStyle(slug)}>
           <div className="ar-dots" aria-hidden="true" />
           <div className="ar-head">
             <a className="ar-back" href="/blog">

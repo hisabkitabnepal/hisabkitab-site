@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { referenceArticles } from "@/lib/reference/articles";
+import { referenceArticles, articleCoverStyle } from "@/lib/reference/articles";
 import { ArticleCard } from "./ArticleCard";
 export function Blog() {
   const [filter, setFilter] = useState("all");
@@ -15,6 +15,7 @@ export function Blog() {
           <article
             className="bf"
             data-slug={featured}
+            style={articleCoverStyle(featured)}
             tabIndex={0}
             role="link"
             onClick={() => open(featured)}
@@ -36,6 +37,7 @@ export function Blog() {
               <article
                 key={slug}
                 data-slug={slug}
+                style={articleCoverStyle(slug)}
                 tabIndex={0}
                 role="link"
                 onClick={() => open(slug)}

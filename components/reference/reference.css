@@ -4054,3 +4054,31 @@ section[id] {
   .abx-cards { grid-template-columns: 1fr; }
   .abx-card { min-height: 0; gap: 36px; }
 }
+
+.ar-hero,
+#pg-blog .bf,
+#pg-blog .bs article,
+.bl i {
+  background-image: linear-gradient(rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.28)), var(--cover);
+  background-size: cover;
+  background-position: center;
+}
+.ar-dots,
+.bf::before,
+.bs article::before {
+  display: none;
+}
+#pg-blog .bf,
+#pg-blog .bf h1 {
+  color: var(--navy);
+}
+#pg-blog .bf p {
+  color: #33475a;
+}
+#pg-blog .bf small,
+#pg-blog .bs small {
+  color: #4a5b6b;
+}
+.ar-more .bl i svg {
+  stroke: var(--navy);
+}

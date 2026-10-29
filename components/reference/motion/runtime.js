@@ -82,7 +82,12 @@ export function mountReferenceMotion(scope, page) {
     });
   let lenis;
   if (!rm) {
-    lenis = new Lenis({ lerp: 0.075, wheelMultiplier: 0.9 });
+    lenis = new Lenis({
+      lerp: 0.075,
+      wheelMultiplier: 0.9,
+      prevent: (node) =>
+        node.matches(".rows, textarea") && node.scrollHeight > node.clientHeight,
+    });
     lenis.on("scroll", ScrollTrigger.update);
     ticker((t) => lenis.raf(t * 1000));
     gsap.ticker.lagSmoothing(0);

@@ -312,7 +312,6 @@ export function Booking({
                   message: e.target.value,
                 }))
               }
-              data-lenis-prevent=""
               placeholder="What the business will do, timelines, anything else"
             ></textarea>
           </div>

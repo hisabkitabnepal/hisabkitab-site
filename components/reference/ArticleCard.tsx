@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { referenceArticles } from "@/lib/reference/articles";
+import { referenceArticles, articleCoverStyle } from "@/lib/reference/articles";
 import { ArticleIcon } from "./ArticleIcon";
 export function ArticleCard({
   slug,
@@ -24,7 +24,7 @@ export function ArticleCard({
         if (e.key === "Enter") open();
       }}
     >
-      <i>
+      <i style={articleCoverStyle(slug)}>
         <ArticleIcon slug={slug} />
       </i>
       <small>
