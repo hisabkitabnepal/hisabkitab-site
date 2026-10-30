@@ -8,7 +8,11 @@ export type ReferenceArticle = {
   note: string;
   cover?: string;
 };
-export const referenceArticles: Record<string, ReferenceArticle> = data;
+export const referenceArticles: Record<string, ReferenceArticle> =
+// Stored oldest first (new articles are added at the bottom); newest comes first here.
+  Object.fromEntries(
+    data.articles.map(({ slug, ...article }) => [slug, article]).reverse(),
+  );
 export function getReferenceArticle(slug: string) {
   return Object.prototype.hasOwnProperty.call(referenceArticles, slug)
     ? referenceArticles[slug]
@@ -56,5 +60,12 @@ export function articleCover(slug: string) {
   return `radial-gradient(at 12% 18%, ${a} 0, transparent 58%), radial-gradient(at 88% 12%, ${b} 0, transparent 55%), radial-gradient(at 72% 92%, ${c} 0, transparent 60%), linear-gradient(${base}, ${base})`;
 }
 export function articleCoverStyle(slug: string) {
-  return { "--cover": articleCover(slug) } as import("react").CSSProperties;
+  const style: Record<string, string> = { "--cover": articleCover(slug) };
+  if (getReferenceArticle(slug)?.cover) {
+    style["--veil"] =
+      "linear-gradient(rgba(8, 16, 24, 0.5), rgba(8, 16, 24, 0.62))";
+    style["--ink"] = "#fff";
+    style["--ink-soft"] = "rgba(255, 255, 255, 0.86)";
+  }
+  return style as import("react").CSSProperties;
 }

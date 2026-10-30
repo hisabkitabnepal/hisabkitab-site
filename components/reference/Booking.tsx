@@ -1,19 +1,61 @@
 "use client";
-import { useEffect, useRef, useState, type FormEvent } from "react";
-import { inquirySchema } from "@/lib/inquiry-validation";
-import {
-  buildReferenceInquiry,
-  sendReferenceInquiry,
-  deliveryUnavailable,
-  resolveReferenceBookingQuery,
-  type ReferenceBookingFields,
-} from "@/lib/reference/booking";
+import { useRef, useState, type FormEvent } from "react";
+import { whatsapp } from "@/lib/business";
+import { services } from "@/lib/services";
+import { plans } from "@/lib/plans";
+import { resolveReferenceBookingQuery } from "@/lib/reference/booking";
+
+type Fields = {
+  name: string;
+  phone: string;
+  email: string;
+  businessType: string;
+  owners: string;
+  business: string;
+  location: string;
+  message: string;
+  consent: boolean;
+};
+
+/** Compiles every filled-in field into one readable WhatsApp message. */
+function buildWhatsappMessage(
+  f: Fields,
+  selection: ReturnType<typeof resolveReferenceBookingQuery>,
+) {
+  const service = services.find((s) => s.id === selection.service)?.title;
+  const plan =
+    selection.service === "accounting"
+      ? plans.find((p) => p.id === selection.plan)?.name
+      : undefined;
+  const line = (label: string, value?: string) =>
+    value && value.trim() ? label + ": " + value.trim() : null;
+  const msg = f.message.trim();
+  const lines: (string | null)[] = [
+    "Hello Hisab Kitab, I would like to book a free consultation call.",
+    "",
+    line("Name", f.name),
+    line("Phone/WhatsApp", f.phone),
+    line("Email", f.email),
+    line("Service", service),
+    line("Plan", plan),
+    line("Business type", f.businessType),
+    line("Number of owners", f.owners),
+    line("Proposed business name", f.business),
+    line("Business location", f.location),
+    msg ? "" : null,
+    msg ? "Message: " + msg : null,
+    "",
+    "I agree to be contacted about this inquiry.",
+  ];
+  return lines.filter((l): l is string => l !== null).join("\n");
+}
+
 export function Booking({
   selection = resolveReferenceBookingQuery(),
 }: {
   selection?: ReturnType<typeof resolveReferenceBookingQuery>;
 }) {
-  const [fields, setFields] = useState<ReferenceBookingFields>({
+  const [fields, setFields] = useState<Fields>({
     name: "",
     phone: "",
     email: "",
@@ -26,34 +68,17 @@ export function Booking({
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [message, setMessage] = useState({ text: "", bad: false });
-  const [sending, setSending] = useState(false);
-  const formRef = useRef<HTMLFormElement>(null),
-    id = useRef<string | null>(null),
-    pending = useRef(false);
-  useEffect(() => {
-    const controller = new AbortController();
-    fetch("/api/inquiries/config", {
-      cache: "no-store",
-      signal: controller.signal,
-    })
-      .then((r) => (r.ok ? r.json() : { enabled: false }))
-      .then((config) => {
-        if (!config.enabled)
-          setMessage({ text: deliveryUnavailable, bad: true });
-      })
-      .catch(() => {
-        if (!controller.signal.aborted)
-          setMessage({ text: deliveryUnavailable, bad: true });
-      });
-    return () => controller.abort();
-  }, []);
+  const [link, setLink] = useState("");
+  const formRef = useRef<HTMLFormElement>(null);
+
   function clearError(e: FormEvent<HTMLFormElement>) {
     const name = (e.target as HTMLInputElement).name;
     if (name) setErrors((current) => ({ ...current, [name]: "" }));
   }
-  async function submit(e: FormEvent) {
+
+  function submit(e: FormEvent) {
     e.preventDefault();
-    if (pending.current) return;
+    setLink("");
     const invalid: Record<string, string> = {};
     if (fields.name.trim().length < 2)
       invalid.name = "Please provide your full name.";
@@ -71,35 +96,49 @@ export function Booking({
         ?.focus();
       return;
     }
-    try {
-      if (!id.current) id.current = crypto.randomUUID();
-      const payload = buildReferenceInquiry(fields, id.current, selection),
-        parsed = inquirySchema.safeParse(payload);
-      if (!parsed.success) {
-        setMessage({ text: parsed.error.issues[0].message, bad: true });
-        return;
-      }
-      pending.current = true;
-      setSending(true);
-      const reference = await sendReferenceInquiry(payload);
+    if (!fields.consent) {
       setMessage({
-        text:
-          "Thank you. Your inquiry has been sent. Reference: " +
-          reference +
-          ".",
-        bad: false,
-      });
-      id.current = null;
-    } catch (error) {
-      setMessage({
-        text: error instanceof Error ? error.message : deliveryUnavailable,
+        text: "Please agree to be contacted about your inquiry.",
         bad: true,
       });
-    } finally {
-      pending.current = false;
-      setSending(false);
+      return;
     }
+    const form = formRef.current;
+    const pick = (n: string) =>
+      (form?.elements.namedItem(n) as HTMLSelectElement | null)?.value ?? "";
+    const url = whatsapp(
+      buildWhatsappMessage(
+        {
+          ...fields,
+          businessType: pick("businessType"),
+          owners: pick("owners"),
+        },
+        selection,
+      ),
+    );
+    setLink(url);
+    // Opened synchronously inside the click handler so mobile browsers don't block it.
+    const opened = window.open(url, "_blank");
+    if (opened) opened.opener = null;
+    setMessage({
+      text: opened
+        ? "WhatsApp is opening with your details filled in. Review the message and tap Send."
+        : "Your message is ready.",
+      bad: false,
+    });
   }
+
+  const set =
+    (key: keyof Fields) =>
+    (
+      e: React.ChangeEvent<
+        HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+      >,
+    ) => {
+      const value = e.target.value;
+      setFields((current) => ({ ...current, [key]: value }));
+    };
+
   return (
     <section className="pg" id="pg-book">
       <div className="bk-grid">
@@ -107,19 +146,10 @@ export function Booking({
           <h1>{"Get in touch with us"}</h1>
           <p>
             {
-              "Tell us what you are planning. We will suggest the right structure and come back with a clear next step. You can also email us at "
+              "Tell us what you are planning. We will suggest the right structure and come back with a clear next step. Your details are sent to us on WhatsApp. You can also email us at "
             }
             <a className="u" href="mailto:hisabkitabnepal@outlook.com">
               {"hisabkitabnepal@outlook.com"}
-            </a>
-            {" or message us on "}
-            <a
-              className="u"
-              href="https://wa.me/9779747857130"
-              target="_blank"
-              rel="noopener"
-            >
-              {"WhatsApp"}
             </a>
             {"."}
           </p>
@@ -144,9 +174,7 @@ export function Booking({
                 aria-describedby={errors.name ? "error-name" : undefined}
                 name="name"
                 value={fields.name}
-                onChange={(e) =>
-                  setFields((current) => ({ ...current, name: e.target.value }))
-                }
+                onChange={set("name")}
                 autoComplete="name"
                 placeholder="Your full name"
               />
@@ -169,12 +197,7 @@ export function Booking({
                 aria-describedby={errors.phone ? "error-phone" : undefined}
                 name="phone"
                 value={fields.phone}
-                onChange={(e) =>
-                  setFields((current) => ({
-                    ...current,
-                    phone: e.target.value,
-                  }))
-                }
+                onChange={set("phone")}
                 type="tel"
                 inputMode="tel"
                 autoComplete="tel"
@@ -197,9 +220,7 @@ export function Booking({
               aria-describedby={errors.email ? "error-email" : undefined}
               name="email"
               value={fields.email}
-              onChange={(e) =>
-                setFields((current) => ({ ...current, email: e.target.value }))
-              }
+              onChange={set("email")}
               type="email"
               autoComplete="email"
               placeholder="you@example.com"
@@ -214,24 +235,21 @@ export function Booking({
               <select
                 id="bType"
                 name="businessType"
-                value={fields.businessType}
-                onChange={(e) =>
-                  setFields((current) => ({
-                    ...current,
-                    businessType: e.target.value,
-                  }))
-                }
-                required
+                defaultValue=""
               >
-                <option value="" disabled hidden>
-                  {"Select"}
-                </option>
-                <option>{"Sole proprietorship"}</option>
-                <option>{"Partnership"}</option>
-                <option>{"Private limited company"}</option>
-                <option>{"Organization or nonprofit"}</option>
-                <option>{"Joint venture / foreign participation"}</option>
-                <option>{"Not sure yet"}</option>
+                <option value="">{"Select"}</option>
+                {[
+                  "Sole proprietorship",
+                  "Partnership",
+                  "Private limited company",
+                  "Organization or nonprofit",
+                  "Joint venture / foreign participation",
+                  "Not sure yet",
+                ].map((o) => (
+                  <option key={o} value={o}>
+                    {o}
+                  </option>
+                ))}
               </select>
             </div>
             <div className="field">
@@ -239,20 +257,14 @@ export function Booking({
               <select
                 id="bOwners"
                 name="owners"
-                value={fields.owners}
-                onChange={(e) =>
-                  setFields((current) => ({
-                    ...current,
-                    owners: e.target.value,
-                  }))
-                }
-                required
+                defaultValue=""
               >
-                <option value="" disabled hidden>
-                  {"Select"}
-                </option>
-                <option>{"Just me"}</option>
-                <option>{"Two or more"}</option>
+                <option value="">{"Select"}</option>
+                {["Just me", "Two or more"].map((o) => (
+                  <option key={o} value={o}>
+                    {o}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
@@ -267,12 +279,7 @@ export function Booking({
                 id="bBiz"
                 name="business"
                 value={fields.business}
-                onChange={(e) =>
-                  setFields((current) => ({
-                    ...current,
-                    business: e.target.value,
-                  }))
-                }
+                onChange={set("business")}
                 placeholder="If you have one in mind"
               />
             </div>
@@ -286,12 +293,7 @@ export function Booking({
                 id="bLoc"
                 name="location"
                 value={fields.location}
-                onChange={(e) =>
-                  setFields((current) => ({
-                    ...current,
-                    location: e.target.value,
-                  }))
-                }
+                onChange={set("location")}
                 placeholder="Municipality, district"
               />
             </div>
@@ -302,16 +304,11 @@ export function Booking({
               <span className="opt-t">{"· optional"}</span>
             </label>
             <textarea
-              maxLength={3000}
+              maxLength={1500}
               id="bMsg"
               name="message"
               value={fields.message}
-              onChange={(e) =>
-                setFields((current) => ({
-                  ...current,
-                  message: e.target.value,
-                }))
-              }
+              onChange={set("message")}
               placeholder="What the business will do, timelines, anything else"
             ></textarea>
           </div>
@@ -334,8 +331,8 @@ export function Booking({
               <a href="/privacy">Privacy policy</a>
             </span>
           </label>
-          <button className="bk-btn" type="submit" disabled={sending}>
-            {sending ? "Sending…" : "Book a Call"}
+          <button className="bk-btn" type="submit">
+            {"Book a Call"}
           </button>
           <div
             className={"form-msg" + (message.bad ? " bad" : "")}
@@ -343,6 +340,19 @@ export function Booking({
             role="status"
           >
             {message.text}
+            {link && (
+              <>
+                {" "}
+                <a
+                  className="u"
+                  href={link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {"Didn’t open? Tap here to continue on WhatsApp."}
+                </a>
+              </>
+            )}
           </div>
         </form>
       </div>

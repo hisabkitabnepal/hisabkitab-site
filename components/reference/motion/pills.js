@@ -5,7 +5,6 @@ export function pillMotion({ gsap, rm, scope, listen, cleanup }) {
     outline: { fill: "#0f2b3f", text: "#ffffff" },
     light: { fill: "#1e2939", text: "#ffffff" },
   };
-  var CARDS = "#pg-blog .bs article, #pg-blog .bl article";
   function kind(p) {
     return p.classList.contains("dark")
       ? "dark"
@@ -17,7 +16,7 @@ export function pillMotion({ gsap, rm, scope, listen, cleanup }) {
   }
   // Resolve what the pointer is over: a pill, a side card, or a grid card (its icon tile fills).
   function targetOf(e) {
-    var el = e.target.closest && e.target.closest(".pill, " + CARDS);
+    var el = e.target.closest && e.target.closest(".pill");
     if (!el || (e.relatedTarget && el.contains(e.relatedTarget))) return null;
     if (el.classList.contains("pill")) {
       var k = kind(el);
@@ -111,4 +110,6 @@ export function pillMotion({ gsap, rm, scope, listen, cleanup }) {
       gsap.to(h, { color: h._base, duration: rm ? 0 : 0.3, ease: "power2.out" });
     }
   });
+
+  
 }

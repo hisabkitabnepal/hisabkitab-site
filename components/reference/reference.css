@@ -4059,7 +4059,7 @@ section[id] {
 #pg-blog .bf,
 #pg-blog .bs article,
 .bl i {
-  background-image: linear-gradient(rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.28)), var(--cover);
+  background-image: var(--veil, linear-gradient(rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.28))), var(--cover);
   background-size: cover;
   background-position: center;
 }
@@ -4070,15 +4070,50 @@ section[id] {
 }
 #pg-blog .bf,
 #pg-blog .bf h1 {
-  color: var(--navy);
+  color: var(--ink, var(--navy));
 }
 #pg-blog .bf p {
-  color: #33475a;
+  color: var(--ink-soft, #33475a);
 }
 #pg-blog .bf small,
 #pg-blog .bs small {
-  color: #4a5b6b;
+  color: var(--ink-soft, #4a5b6b);
+}
+#pg-blog .bs article {
+  color: var(--ink, var(--navy));
+}
+#pg-blog .bl i svg {
+  stroke: var(--ink, var(--navy));
 }
 .ar-more .bl i svg {
-  stroke: var(--navy);
+  stroke: var(--ink, var(--navy));
+}
+.ar-back,
+.ar-meta,
+.ar-stats b,
+#pg-article .ar-h1 {
+  color: var(--ink, var(--navy));
+}
+.ar-stats small {
+  color: var(--ink-soft, #6b6b78);
+}
+
+/* Blog cards: hover light + lift are driven by GSAP in motion/pills.js */
+#pg-blog .bf,
+#pg-blog .bs article,
+#pg-blog .bl i {
+  box-shadow: 0 0 0 0 rgba(15, 43, 63, 0);
+}
+.card-glow {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 360px;
+  height: 360px;
+  margin: -180px 0 0 -180px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.26), transparent 65%);
+  opacity: 0;
+  pointer-events: none;
+  z-index: -1;
 }

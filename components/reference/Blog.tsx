@@ -7,7 +7,8 @@ export function Blog() {
   const [filter, setFilter] = useState("all");
   const router = useRouter();
   const open = (slug: string) => router.push("/blog/" + slug);
-  const featured = "register-a-business-nepal";
+  const keys = Object.keys(referenceArticles);
+  const featured = keys[0];
   return (
     <section className="pg" id="pg-blog">
       <div className="pg-body">
@@ -30,10 +31,7 @@ export function Blog() {
             </div>
           </article>
           <div className="bs">
-            {[
-              "closing-a-business-nepal",
-              "annual-company-filings-tax-clearance",
-            ].map((slug) => (
+            {keys.slice(1, 3).map((slug) => (
               <article
                 key={slug}
                 data-slug={slug}
