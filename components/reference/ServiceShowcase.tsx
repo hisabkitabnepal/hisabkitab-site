@@ -5,11 +5,11 @@ export function ServiceShowcase() {
     <section className="services" id="services">
       <div className="services-head">
         <h2 data-split="">
-          {"Everything you need to simplify business accounting"}
+          {"Your Complete Financial Partner in Business."}
         </h2>
         <p data-reveal="">
           {
-            "From the first registration to the final clearance, we handle the paperwork and tell you what matters."
+            "Understand Your Numbers. Make Better Business Decisions. Your financial numbers tell a story about your business. We help you understand that story through financial analysis, accounting, taxation and practical business advice."
           }
         </p>
         <a className="link-maroon" href="/free-consultation" data-reveal="">

@@ -8,42 +8,42 @@
     "adjustment": "0%"
   },
   "sole-year": {
-    "big": "NPR 3,25,000",
+    "big": "NPR 1,10,000",
     "label": "Estimated income tax",
     "formula": "NPR 18,00,000 · slab rates",
-    "rows": "Turnover\nNPR 45,00,000\nTaxable profit\nNPR 18,00,000\nFirst NPR 5,00,000 @ 1%\nNPR 5,000\nNext NPR 2,00,000 @ 10%\nNPR 20,000\nNext NPR 3,00,000 @ 20%\nNPR 60,000\nNext NPR 8,00,000 @ 30%\nNPR 2,40,000",
+    "rows": "Turnover\nNPR 45,00,000\nTaxable profit\nNPR 18,00,000\nFirst NPR 10,00,000 @ 0%\nNPR 0\nNext NPR 5,00,000 @ 10%\nNPR 50,000\nNext NPR 3,00,000 @ 20%\nNPR 60,000",
     "errors": [],
     "adjustment": "0%"
   },
   "sole-quarter": {
-    "big": "NPR 81,250",
+    "big": "NPR 27,500",
     "label": "Estimated income tax · per quarter",
     "formula": "NPR 18,00,000 · slab rates ÷ 4",
-    "rows": "Turnover\nNPR 45,00,000\nTaxable profit\nNPR 18,00,000\nFirst NPR 5,00,000 @ 1%\nNPR 5,000\nNext NPR 2,00,000 @ 10%\nNPR 20,000\nNext NPR 3,00,000 @ 20%\nNPR 60,000\nNext NPR 8,00,000 @ 30%\nNPR 2,40,000\nAnnual tax\nNPR 3,25,000",
+    "rows": "Turnover\nNPR 45,00,000\nTaxable profit\nNPR 18,00,000\nFirst NPR 10,00,000 @ 0%\nNPR 0\nNext NPR 5,00,000 @ 10%\nNPR 50,000\nNext NPR 3,00,000 @ 20%\nNPR 60,000\nAnnual tax\nNPR 1,10,000",
     "errors": [],
     "adjustment": "0%"
   },
   "sole-month": {
-    "big": "NPR 27,083",
+    "big": "NPR 9,167",
     "label": "Estimated income tax · per month",
     "formula": "NPR 18,00,000 · slab rates ÷ 12",
-    "rows": "Turnover\nNPR 45,00,000\nTaxable profit\nNPR 18,00,000\nFirst NPR 5,00,000 @ 1%\nNPR 5,000\nNext NPR 2,00,000 @ 10%\nNPR 20,000\nNext NPR 3,00,000 @ 20%\nNPR 60,000\nNext NPR 8,00,000 @ 30%\nNPR 2,40,000\nAnnual tax\nNPR 3,25,000",
+    "rows": "Turnover\nNPR 45,00,000\nTaxable profit\nNPR 18,00,000\nFirst NPR 10,00,000 @ 0%\nNPR 0\nNext NPR 5,00,000 @ 10%\nNPR 50,000\nNext NPR 3,00,000 @ 20%\nNPR 60,000\nAnnual tax\nNPR 1,10,000",
     "errors": [],
     "adjustment": "0%"
   },
   "sole-plus20": {
-    "big": "NPR 36,883",
+    "big": "NPR 15,167",
     "label": "Estimated income tax · per month",
     "formula": "NPR 21,60,000 · slab rates ÷ 12",
-    "rows": "Turnover\nNPR 54,00,000\nTaxable profit\nNPR 21,60,000\nChange applied\n+20%\nFirst NPR 5,00,000 @ 1%\nNPR 5,000\nNext NPR 2,00,000 @ 10%\nNPR 20,000\nNext NPR 3,00,000 @ 20%\nNPR 60,000\nNext NPR 10,00,000 @ 30%\nNPR 3,00,000\nNext NPR 1,60,000 @ 36%\nNPR 57,600\nAnnual tax\nNPR 4,42,600",
+    "rows": "Turnover\nNPR 54,00,000\nTaxable profit\nNPR 21,60,000\nChange applied\n+20%\nFirst NPR 10,00,000 @ 0%\nNPR 0\nNext NPR 5,00,000 @ 10%\nNPR 50,000\nNext NPR 6,60,000 @ 20%\nNPR 1,32,000\nAnnual tax\nNPR 1,82,000",
     "errors": [],
     "adjustment": "+20%"
   },
   "sole-minus20": {
-    "big": "NPR 18,083",
+    "big": "NPR 3,667",
     "label": "Estimated income tax · per month",
     "formula": "NPR 14,40,000 · slab rates ÷ 12",
-    "rows": "Turnover\nNPR 36,00,000\nTaxable profit\nNPR 14,40,000\nChange applied\n−20%\nFirst NPR 5,00,000 @ 1%\nNPR 5,000\nNext NPR 2,00,000 @ 10%\nNPR 20,000\nNext NPR 3,00,000 @ 20%\nNPR 60,000\nNext NPR 4,40,000 @ 30%\nNPR 1,32,000\nAnnual tax\nNPR 2,17,000",
+    "rows": "Turnover\nNPR 36,00,000\nTaxable profit\nNPR 14,40,000\nChange applied\n−20%\nFirst NPR 10,00,000 @ 0%\nNPR 0\nNext NPR 4,40,000 @ 10%\nNPR 44,000\nAnnual tax\nNPR 44,000",
     "errors": [],
     "adjustment": "−20%"
   },

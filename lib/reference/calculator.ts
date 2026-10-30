@@ -1,13 +1,12 @@
-/** Illustrative preview rates, deliberately separate from the existing tax engine. */
+/** Resident sole-proprietor business-income slabs: [band width, rate]. */
 export const REFERENCE_TAX = {
   companyRate: 0.25,
   slabs: [
-    [500000, 0.01],
-    [200000, 0.1],
-    [300000, 0.2],
-    [1000000, 0.3],
-    [3000000, 0.36],
-    [Infinity, 0.39],
+    [1000000, 0],
+    [500000, 0.1],
+    [1000000, 0.2],
+    [1500000, 0.27],
+    [Infinity, 0.29],
   ],
 } as const;
 export const formatReferenceNumber = (n: number) =>
@@ -52,7 +51,7 @@ export function estimateReferenceTax(input: EstimateInput) {
           " NPR " +
           fmt(part) +
           " @ " +
-          rate * 100 +
+          Math.round(rate * 10000) / 100 +
           "%",
         "NPR " + fmt(amount),
       ]);

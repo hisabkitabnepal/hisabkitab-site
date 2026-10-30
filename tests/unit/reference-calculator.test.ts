@@ -26,7 +26,7 @@ test("reference company example and period/adjustment retain the supplied workin
   assert.deepEqual(monthly.rows[2], ["Change applied", "+20%"]);
 });
 
-test("illustrative sole proprietor slabs preserve all six supplied bands", () => {
+test("illustrative sole proprietor slabs follow the five supplied bands", () => {
   assert.equal(
     estimateReferenceTax({
       turnover: 6000000,
@@ -35,7 +35,27 @@ test("illustrative sole proprietor slabs preserve all six supplied bands", () =>
       period: 1,
       adjustment: 0,
     }).total,
-    1855000,
+    1235000,
+  );
+  assert.equal(
+    estimateReferenceTax({
+      turnover: 1000000,
+      profit: 1000000,
+      structure: "sole",
+      period: 1,
+      adjustment: 0,
+    }).total,
+    0,
+  );
+  assert.equal(
+    estimateReferenceTax({
+      turnover: 1800000,
+      profit: 1800000,
+      structure: "sole",
+      period: 1,
+      adjustment: 0,
+    }).total,
+    110000,
   );
   assert.equal(
     estimateReferenceTax({
