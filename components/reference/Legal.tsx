@@ -49,6 +49,10 @@ export function Legal() {
   const first = useRef(true);
   const view = legalViews[active];
 
+  useLayoutEffect(() => {
+    window.scrollTo({ top: 0, left: 0 , behavior: "instant" });
+  }, []);
+
   // Pick the tab from the URL hash (#terms / #privacy) and follow hash changes.
   useLayoutEffect(() => {
     const sync = () => setActive(legalKeyFromHash(location.hash));
