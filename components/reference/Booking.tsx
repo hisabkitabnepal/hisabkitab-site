@@ -328,7 +328,7 @@ export function Booking({
             />{" "}
             <span>
               I agree to be contacted about my inquiry.{" "}
-              <a href="/privacy">Privacy policy</a>
+              <a href="/terms-and-privacy#privacy">Privacy policy</a>
             </span>
           </label>
           <button className="bk-btn" type="submit">

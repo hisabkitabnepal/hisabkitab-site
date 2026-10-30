@@ -82,6 +82,10 @@ export function Footer() {
       <div className="foot-bar">
         <span>{"© 2026 Hisab Kitab"}</span>
         <span>{"Financial & Tax Consultants"}</span>
+        <span className="foot-legal">
+          <a href="/terms-and-privacy#terms">{"Terms and Conditions"}</a>
+          <a href="/terms-and-privacy#privacy">{"Privacy Policy"}</a>
+        </span>
       </div>
     </footer>
   );

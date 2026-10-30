@@ -1,4 +1,5 @@
 import "@/components/reference/reference.css";
+import "@/components/reference/reference-mobile-menu.css";
 import RootLayout, { metadata } from "@/components/root-document";
 import { ReferenceShell } from "@/components/reference/Shell";
 export { metadata };
