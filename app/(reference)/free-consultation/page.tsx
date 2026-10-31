@@ -3,8 +3,8 @@ import { ReferenceLayout } from "@/components/reference/Page";
 import { Booking } from "@/components/reference/Booking";
 import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata(
-  "Free consultation",
-  "Tell us what you are planning. We will suggest the right structure and a clear next step.",
+  "Free Accounting & Registration Consultation",
+  "Book a free first consultation. Tell us your plans and get a clear next step on registration, accounting or tax. Call, WhatsApp or use the form.",
   "/free-consultation",
 );
 type QueryProps = {

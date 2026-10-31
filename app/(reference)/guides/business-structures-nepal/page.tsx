@@ -4,7 +4,7 @@ import { faqs } from "@/lib/reference/business-structures";
 import { pageMetadata, siteUrl } from "@/lib/seo";
 
 const path = "/guides/business-structures-nepal";
-const title = "Register a Business in Nepal: Structures & Tax FY 2083/84";
+const title = "Register a Business in Nepal: Structures & Tax";
 const description =
   "Compare sole proprietorship, partnership and private limited company in Nepal, see FY 2083/84 tax slabs and register with Hisab Kitab in Kathmandu.";
 

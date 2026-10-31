@@ -41,6 +41,16 @@ export default config({
               description: 'Shown before the category, e.g. "Hisab Kitab".',
               validation: { isRequired: true },
             }),
+            published: fields.date({
+              label: "Published",
+              description:
+                "Date the article first went live. Used in search-engine markup.",
+            }),
+            modified: fields.date({
+              label: "Last updated",
+              description:
+                "Change this when you make a meaningful edit. Leave empty to reuse the published date.",
+            }),
             lead: fields.text({
               label: "Short summary",
               multiline: true,

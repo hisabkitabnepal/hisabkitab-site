@@ -230,9 +230,11 @@ export function mountReferenceMotion(scope, page) {
   });
   ScrollTrigger.refresh();
   let alive = true;
-  document.fonts.ready.then(() => {
-    if (alive) ScrollTrigger.refresh();
-  });
+  // Fonts already settled: the refresh above is enough. Skip the second one.
+  if (document.fonts.status !== "loaded")
+    document.fonts.ready.then(() => {
+      if (alive) ScrollTrigger.refresh();
+    });
   return () => {
     alive = false;
     owner.revert();

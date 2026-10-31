@@ -7,6 +7,9 @@ export type ReferenceArticle = {
   secs: { h: string; p: string[] }[];
   note: string;
   cover?: string;
+  /** ISO date (YYYY-MM-DD). Optional; omitted from markup when empty. */
+  published?: string | null;
+  modified?: string | null;
 };
 export const referenceArticles: Record<string, ReferenceArticle> =
 // Stored oldest first (new articles are added at the bottom); newest comes first here.
@@ -39,33 +42,22 @@ export function readingMinutes(article: ReferenceArticle) {
     ),
   );
 }
-const coverPalettes = [
-  ["#ffd9e4", "#cfe0ff", "#fff1d6", "#f4ecff"],
-  ["#d4f1e4", "#d6e6ff", "#fdf0d5", "#eef9f1"],
-  ["#ffe3cf", "#ffd0dc", "#e6dcff", "#fff4ea"],
-  ["#d3ecff", "#e3d9ff", "#d9f6ee", "#f1f8ff"],
-  ["#fde7b8", "#ffd3d3", "#d8e7ff", "#fff8e6"],
-  ["#e1d8ff", "#c9f0f0", "#ffe0ee", "#f6f2ff"],
-  ["#d5f2d0", "#fdf1b8", "#cfe3ff", "#f4fbef"],
-  ["#ffd6cc", "#f9d5f0", "#d4e4ff", "#fff1ee"],
-];
-// Notion-style cover: uses the article's own `cover` image when set, otherwise
-// a soft gradient picked from the slug so every new article gets one automatically.
+// Articles without their own cover use this artwork, so nothing falls back to a gradient.
+export const defaultCover = "/blog/default-cover.webp";
 export function articleCover(slug: string) {
   const custom = getReferenceArticle(slug)?.cover;
-  if (custom) return `url("${custom}")`;
-  let h = 0;
-  for (const ch of slug) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
-  const [a, b, c, base] = coverPalettes[h % coverPalettes.length];
-  return `radial-gradient(at 12% 18%, ${a} 0, transparent 58%), radial-gradient(at 88% 12%, ${b} 0, transparent 55%), radial-gradient(at 72% 92%, ${c} 0, transparent 60%), linear-gradient(${base}, ${base})`;
+  return `url("${custom || defaultCover}")`;
 }
+// Uploaded photos get a strong dark veil so titles stay readable. The default
+// artwork is already dark, so it only needs a light one and its colour shows through.
 export function articleCoverStyle(slug: string) {
-  const style: Record<string, string> = { "--cover": articleCover(slug) };
-  if (getReferenceArticle(slug)?.cover) {
-    style["--veil"] =
-      "linear-gradient(rgba(8, 16, 24, 0.5), rgba(8, 16, 24, 0.62))";
-    style["--ink"] = "#fff";
-    style["--ink-soft"] = "rgba(255, 255, 255, 0.86)";
-  }
-  return style as import("react").CSSProperties;
+  const custom = Boolean(getReferenceArticle(slug)?.cover);
+  return {
+    "--cover": articleCover(slug),
+    "--veil": custom
+      ? "linear-gradient(rgba(8, 16, 24, 0.5), rgba(8, 16, 24, 0.62))"
+      : "linear-gradient(rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.18))",
+    "--ink": "#fff",
+    "--ink-soft": "rgba(255, 255, 255, 0.86)",
+  } as import("react").CSSProperties;
 }

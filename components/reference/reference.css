@@ -4507,6 +4507,18 @@ section[id] {
   display: none;
 }
 
+/* About page only: the same artwork as the register guide hero, zoomed in on a
+   different part so the two heroes don't look identical.
+   Tune: bigger --about-zoom = closer crop; --about-pos = which part is shown (x y). */
+#pg-about .abx-hero {
+  --about-zoom: 190%;
+  --about-pos: 15% 85%;
+  background: var(--scrim), var(--art);
+  background-repeat: no-repeat;
+  background-size: auto, var(--about-zoom) auto;
+  background-position: 0 0, var(--about-pos);
+}
+
 /* ===== Register business: comparison strip + slabs (site font only) ===== */
 .rb-page .rb-lab {
   font-family: inherit;

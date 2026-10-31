@@ -17,7 +17,13 @@ export async function generateMetadata({
   const { slug } = await params;
   const article = getReferenceArticle(slug);
   if (!article) notFound();
-  return pageMetadata(article.title, article.lead, "/blog/" + slug);
+  return pageMetadata(article.title, article.lead, "/blog/" + slug, {
+    image: article.cover || undefined,
+    article: {
+      publishedTime: article.published || undefined,
+      modifiedTime: article.modified || article.published || undefined,
+    },
+  });
 }
 export default async function Page({
   params,
@@ -32,8 +38,17 @@ export default async function Page({
     "@type": "Article",
     headline: article.title,
     description: article.lead,
+    ...(article.published && { datePublished: article.published }),
+    ...((article.modified || article.published) && {
+      dateModified: article.modified || article.published,
+    }),
+    ...(article.cover && { image: [siteUrl + article.cover] }),
     author: { "@type": "Person", name: "Tanchho Limbu" },
-    publisher: { "@type": "Organization", name: "Hisab Kitab" },
+    publisher: {
+      "@type": "Organization",
+      name: "Hisab Kitab",
+      logo: { "@type": "ImageObject", url: siteUrl + "/logo-full.webp" },
+    },
     mainEntityOfPage: siteUrl + "/blog/" + slug,
   };
   return (

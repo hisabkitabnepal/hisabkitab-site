@@ -2,8 +2,8 @@ import { ReferenceLayout } from "@/components/reference/Page";
 import { Calculator } from "@/components/reference/Calculator";
 import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata(
-  "Tax calculator",
-  "Explore an illustrative income-tax estimate with the working shown step by step.",
+  "Nepal Income Tax Calculator FY 2083/84",
+  "Estimate income tax for a sole proprietor or a private limited company in Nepal for FY 2083/84, with every step of the calculation shown. Free to use.",
   "/tools",
 );
 export default function Page() {
