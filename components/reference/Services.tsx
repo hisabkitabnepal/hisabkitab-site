@@ -51,12 +51,6 @@ export function Services() {
         ))}
       </div>
       <p className="sp-note">
-        {"Not sure which structure fits? "}
-        <a href="/guides/business-structures-nepal">
-          {"Compare sole proprietorship, partnership and private limited company."}
-        </a>
-      </p>
-      <p className="sp-note">
         {
           "Monthly prices include VAT. Government fees, taxes, penalties and other statutory payments are separate, and any additional work is itemized in your quote."
         }

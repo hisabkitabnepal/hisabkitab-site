@@ -147,6 +147,7 @@
   padding: clamp(56px, 6vw, 96px) var(--pad) clamp(32px, 4vw, 52px);
 }
 .lg-page .lg-head h1 {
+  font-size: 45px;
   font-weight: 400;
   letter-spacing: -0.04em;
   line-height: 1.05;
