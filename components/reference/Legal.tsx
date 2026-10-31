@@ -42,16 +42,39 @@ function Rich({ text }: { text: string }) {
   );
 }
 
+/** Jump to the top. Lenis keeps its own scroll target, so it has to be told too. */
+function toTop() {
+  window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  (
+    window as unknown as {
+      __lenis?: { scrollTo: (y: number, o?: { immediate?: boolean; force?: boolean }) => void };
+    }
+  ).__lenis?.scrollTo(0, { immediate: true, force: true });
+}
+
+/** Runs fn once the page is revealed (immediately if it already is), so entrance tweens are not played behind the hidden page. */
+function whenReady(el: HTMLElement, fn: () => void) {
+  const root = el.closest<HTMLElement>(".reference-page");
+  if (!root || root.dataset.ready) {
+    fn();
+    return () => {};
+  }
+  const mo = new MutationObserver(() => {
+    if (!root.dataset.ready) return;
+    mo.disconnect();
+    fn();
+  });
+  mo.observe(root, { attributes: true, attributeFilter: ["data-ready"] });
+  return () => mo.disconnect();
+}
+
 export function Legal() {
   const [active, setActive] = useState<LegalKey>("terms");
   const [section, setSection] = useState<string>(legalViews.terms.sections[0].id);
   const sheetRef = useRef<HTMLElement>(null);
-  const first = useRef(true);
+  const titleRef = useRef<HTMLHeadingElement>(null);
   const view = legalViews[active];
-
-  useLayoutEffect(() => {
-    window.scrollTo({ top: 0, left: 0 , behavior: "instant" });
-  }, []);
+  const other = keys.find((k) => k !== active)!;
 
   // Pick the tab from the URL hash (#terms / #privacy) and follow hash changes.
   useLayoutEffect(() => {
@@ -61,29 +84,35 @@ export function Legal() {
     return () => window.removeEventListener("hashchange", sync);
   }, []);
 
-  // Reset the highlighted section, scroll to top and fade the sheet in when the tab changes.
-  useEffect(() => {
+  // On load and whenever the tab changes: reset the highlighted section, scroll to top and fade the title and sheet in.
+  useLayoutEffect(() => {
     setSection(legalViews[active].sections[0].id);
-    if (first.current) {
-      first.current = false;
-      return;
-    }
-    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    toTop();
+    // Next.js can scroll to the hash target after this effect; settle at the top once it has.
+    const raf = requestAnimationFrame(toTop);
     const sheet = sheetRef.current;
-    if (!sheet || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const tween = gsap.fromTo(
-      sheet,
-      { y: 18, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.7,
-        ease: "power3.out",
-        clearProps: "transform,opacity",
-      },
-    );
+    const title = titleRef.current;
+    let tween: gsap.core.Tween | undefined;
+    let stop = () => {};
+    if (sheet && title && !matchMedia("(prefers-reduced-motion: reduce)").matches)
+      stop = whenReady(sheet, () => {
+        tween = gsap.fromTo(
+          [title, sheet],
+          { y: 18, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.7,
+            ease: "power3.out",
+            stagger: 0.08,
+            clearProps: "transform,opacity",
+          },
+        );
+      });
     return () => {
-      tween.kill();
+      cancelAnimationFrame(raf);
+      stop();
+      tween?.kill();
     };
   }, [active]);
 
@@ -114,6 +143,18 @@ export function Legal() {
 
   return (
     <section className="pg lg-page" id="pg-legal" data-page="legal">
+      <div className="lg-head">
+        <h1 ref={titleRef}>{view.title}</h1>
+        <button
+          type="button"
+          className="pill dark"
+          onClick={() => {
+            location.hash = other;
+          }}
+        >
+          Switch to {legalViews[other].label} <span className="arr">›</span>
+        </button>
+      </div>
       <div className="lg-body" key={active}>
         <nav className="lg-toc" aria-label={`${view.title} sections`}>
           <p>On this page</p>

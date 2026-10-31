@@ -89,10 +89,12 @@ export function mountReferenceMotion(scope, page) {
         node.matches(".rows, textarea") && node.scrollHeight > node.clientHeight,
     });
     lenis.on("scroll", ScrollTrigger.update);
+    window.__lenis = lenis;
     ticker((t) => lenis.raf(t * 1000));
     gsap.ticker.lagSmoothing(0);
     cleanup(() => {
       lenis.destroy();
+      if (window.__lenis === lenis) delete window.__lenis;
       gsap.ticker.lagSmoothing(500, 33);
     });
   }
