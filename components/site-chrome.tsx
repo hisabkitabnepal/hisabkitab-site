@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { Menu, MessageCircle, Phone, Mail } from "lucide-react";
 import { Sheet, SheetTrigger, SheetContent, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 import { whatsapp, businessPhone, phoneHref, businessEmail, emailHref } from "@/lib/business";
-const links = [["Register a business", "/register-business"], ["Services", "/services"], ["Monthly plan", "/monthly-plan"], ["Tax calculator", "/tools"], ["About us", "/about"], ["Blog", "/blog"]];
+const links = [["Register a business", "/guides/business-structures-nepal"], ["Services", "/services"], ["Monthly plan", "/monthly-plan"], ["Tax calculator", "/tools"], ["About us", "/about"], ["Blog", "/blog"]];
 export function Brand() {
  return <Link className="brand" href="/" aria-label="Hisab Kitab home"><span className="brand-emblem"><img src="/logo-full.webp" alt="" width={392} height={520}/></span><span><strong>Hisab Kitab</strong><small>Financial & Tax Consultants</small></span></Link>;
 }

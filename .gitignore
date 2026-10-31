@@ -8,3 +8,7 @@ node_modules/
 /out/
 /dist/
 *.tsbuildinfo
+
+# Local browser evidence and Python comparison cache
+/verification-output/
+/tests/browser/__pycache__/

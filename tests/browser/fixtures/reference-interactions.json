@@ -1,0 +1,116 @@
+{
+  "company-year": {
+    "big": "NPR 4,50,000",
+    "label": "Estimated income tax",
+    "formula": "NPR 18,00,000 × 25%",
+    "rows": "Turnover\nNPR 45,00,000\nTaxable profit\nNPR 18,00,000\nGeneral company rate\n25%",
+    "errors": [],
+    "adjustment": "0%"
+  },
+  "sole-year": {
+    "big": "NPR 1,10,000",
+    "label": "Estimated income tax",
+    "formula": "NPR 18,00,000 · slab rates",
+    "rows": "Turnover\nNPR 45,00,000\nTaxable profit\nNPR 18,00,000\nFirst NPR 10,00,000 @ 0%\nNPR 0\nNext NPR 5,00,000 @ 10%\nNPR 50,000\nNext NPR 3,00,000 @ 20%\nNPR 60,000",
+    "errors": [],
+    "adjustment": "0%"
+  },
+  "sole-quarter": {
+    "big": "NPR 27,500",
+    "label": "Estimated income tax · per quarter",
+    "formula": "NPR 18,00,000 · slab rates ÷ 4",
+    "rows": "Turnover\nNPR 45,00,000\nTaxable profit\nNPR 18,00,000\nFirst NPR 10,00,000 @ 0%\nNPR 0\nNext NPR 5,00,000 @ 10%\nNPR 50,000\nNext NPR 3,00,000 @ 20%\nNPR 60,000\nAnnual tax\nNPR 1,10,000",
+    "errors": [],
+    "adjustment": "0%"
+  },
+  "sole-month": {
+    "big": "NPR 9,167",
+    "label": "Estimated income tax · per month",
+    "formula": "NPR 18,00,000 · slab rates ÷ 12",
+    "rows": "Turnover\nNPR 45,00,000\nTaxable profit\nNPR 18,00,000\nFirst NPR 10,00,000 @ 0%\nNPR 0\nNext NPR 5,00,000 @ 10%\nNPR 50,000\nNext NPR 3,00,000 @ 20%\nNPR 60,000\nAnnual tax\nNPR 1,10,000",
+    "errors": [],
+    "adjustment": "0%"
+  },
+  "sole-plus20": {
+    "big": "NPR 15,167",
+    "label": "Estimated income tax · per month",
+    "formula": "NPR 21,60,000 · slab rates ÷ 12",
+    "rows": "Turnover\nNPR 54,00,000\nTaxable profit\nNPR 21,60,000\nChange applied\n+20%\nFirst NPR 10,00,000 @ 0%\nNPR 0\nNext NPR 5,00,000 @ 10%\nNPR 50,000\nNext NPR 6,60,000 @ 20%\nNPR 1,32,000\nAnnual tax\nNPR 1,82,000",
+    "errors": [],
+    "adjustment": "+20%"
+  },
+  "sole-minus20": {
+    "big": "NPR 3,667",
+    "label": "Estimated income tax · per month",
+    "formula": "NPR 14,40,000 · slab rates ÷ 12",
+    "rows": "Turnover\nNPR 36,00,000\nTaxable profit\nNPR 14,40,000\nChange applied\n−20%\nFirst NPR 10,00,000 @ 0%\nNPR 0\nNext NPR 4,40,000 @ 10%\nNPR 44,000\nAnnual tax\nNPR 44,000",
+    "errors": [],
+    "adjustment": "−20%"
+  },
+  "zero-profit": {
+    "big": "NPR 0",
+    "label": "Estimated income tax · per month",
+    "formula": "NPR 0 · slab rates ÷ 12",
+    "rows": "Turnover\nNPR 45,00,000\nTaxable profit\nNPR 0\nAnnual tax\nNPR 0",
+    "errors": [],
+    "adjustment": "0%"
+  },
+  "profit-validation": "Profit cannot be higher than turnover.",
+  "turnover-validation": "Enter your annual turnover as a number.",
+  "banner-dismissal": "persists after reload",
+  "faq-exclusive": [
+    "false",
+    "true",
+    "false",
+    "false",
+    "false",
+    "false"
+  ],
+  "faq-collapse": [
+    "false",
+    "false",
+    "false",
+    "false",
+    "false",
+    "false"
+  ],
+  "dropdown-items": [
+    "Business registrationStructure, documents, filing",
+    "Monthly accountingBookkeeping and summaries",
+    "Tax & annual filingsVAT, income tax, company filings",
+    "Audit assistanceRecords and auditor support",
+    "Financial reportingP&L, balance sheet, cash flow",
+    "Business closureWind down and clear what is owed"
+  ],
+  "filter-Registration": [
+    "Sole proprietorship or company? How to choose"
+  ],
+  "filter-Compliance": [
+    "VAT returns: what to keep ready every month",
+    "What tax clearance means and when you need it"
+  ],
+  "filter-Accounting": [
+    "Reading your monthly numbers"
+  ],
+  "filter-Audit": [
+    "Preparing for your audit"
+  ],
+  "filter-Closure": [
+    "Closing a business properly"
+  ],
+  "filter-All articles": [
+    "Sole proprietorship or company? How to choose",
+    "VAT returns: what to keep ready every month",
+    "What tax clearance means and when you need it",
+    "Reading your monthly numbers",
+    "Preparing for your audit",
+    "Closing a business properly"
+  ],
+  "article-keyboard": "Notes on running a business in Nepal.",
+  "article-contents": "selected section visible",
+  "book-empty": "Please check the highlighted fields.",
+  "book-required-fields": [
+    "f-bName",
+    "f-bPhone"
+  ]
+}
