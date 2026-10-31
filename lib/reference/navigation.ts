@@ -23,6 +23,7 @@ export function referencePageFromPath(pathname: string) {
     "/blog": "blog",
     "/free-consultation": "book",
     "/tools": "calculator",
+    "/guides/business-structures-nepal": "register",
   } as const;
   return pages[pathname as keyof typeof pages] ?? ("other" as const);
 }

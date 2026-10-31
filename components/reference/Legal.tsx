@@ -68,7 +68,7 @@ export function Legal() {
       first.current = false;
       return;
     }
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
     const sheet = sheetRef.current;
     if (!sheet || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const tween = gsap.fromTo(
@@ -114,28 +114,6 @@ export function Legal() {
 
   return (
     <section className="pg lg-page" id="pg-legal" data-page="legal">
-      <div className="lg-head">
-        <div>
-          <h1>{view.title}</h1>
-          <p className="lg-upd">Last updated {legalUpdated}</p>
-        </div>
-        <div className="lg-tabs" role="tablist" aria-label="Legal documents">
-          {keys.map((k) => (
-            <button
-              key={k}
-              type="button"
-              role="tab"
-              aria-selected={active === k}
-              className={active === k ? "on" : undefined}
-              onClick={() => {
-                if (location.hash !== "#" + k) location.hash = k;
-              }}
-            >
-              {legalViews[k].label}
-            </button>
-          ))}
-        </div>
-      </div>
       <div className="lg-body" key={active}>
         <nav className="lg-toc" aria-label={`${view.title} sections`}>
           <p>On this page</p>

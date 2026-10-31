@@ -115,7 +115,7 @@ export function mountReferenceMotion(scope, page) {
       servicesMotion(runtime, false);
     }
     if (page === "services") servicesMotion(runtime, true);
-    if (page === "about") aboutMotion(runtime);
+    if (page === "about" || page === "register") aboutMotion(runtime);
     if (page === "article") articleMotion(runtime);
     entranceMotion(runtime, page);
     pillMotion(runtime);

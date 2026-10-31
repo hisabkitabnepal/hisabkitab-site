@@ -16,6 +16,7 @@ const menu = [
 export function Navigation() {
   const pathname = usePathname();
   const page = referencePageFromPath(pathname);
+  const onGuide = pathname.startsWith("/guides/");
   const [open, setOpen] = useState(false);
   const [svcOpen, setSvcOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
@@ -122,6 +123,9 @@ export function Navigation() {
         <span className="logo-word">Hisab Kitab</span>
       </a>
       <nav className="nav-links" aria-label="Primary">
+        <a href="/guides/business-structures-nepal" className={onGuide ? "on" : undefined}>
+          Register Business
+        </a>
         <div className="has-dd">
           <a
             href="/services"
@@ -149,6 +153,7 @@ export function Navigation() {
             </div>
           </div>
         </div>
+        
         <a href="/tools" className={page === "calculator" ? "on" : undefined}>
           Tax Calculator
         </a>
@@ -188,6 +193,13 @@ export function Navigation() {
         inert={!open}
       >
         <nav className="m-in" aria-label="Mobile">
+          <a
+            href="/guides/business-structures-nepal"
+            className={"m-item m-row" + (onGuide ? " on" : "")}
+            onClick={close}
+          >
+            Register Business
+          </a>
           <div className="m-item m-svc">
             <button
               type="button"

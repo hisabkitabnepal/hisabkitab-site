@@ -129,10 +129,10 @@ export function About() {
       <div className="abx-wall" aria-label="Clients">
         <p>{"Trusted by over 10 companies"}</p>
         <div className="abx-logos">
-          <div className="abx-logo">{"Trumark Agency"}</div>
-          <div className="abx-logo">{"Eruchi"}</div>
-          <div className="abx-logo">{"Himalayan Java"}</div>
-          <div className="abx-logo">{"Sisha Trading Concern"}</div>
+          <div className="abx-logo"><img src="/logos/ambassador-designs.webp" alt="Ambassador Designs" width={316} height={120} /></div>
+          <div className="abx-logo"><img src="/logos/german-recruiting.webp" alt="GermanRecruiting" width={216} height={120} /></div>
+          <div className="abx-logo"><img src="/logos/mellow-bakeshop.webp" alt="Mellow Bakeshop" width={170} height={120} /></div>
+          <div className="abx-logo"><img src="/logos/stc.webp" alt="STC" width={113} height={120} /></div>
         </div>
       </div>
     </section>

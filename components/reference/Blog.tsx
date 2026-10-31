@@ -44,7 +44,7 @@ export function Blog() {
                 }}
               >
                 <small>
-                  {referenceArticles[slug].date} · {referenceArticles[slug].cat}
+                  {referenceArticles[slug].date}{"\u2003"}{referenceArticles[slug].cat}
                 </small>
                 <h4>{referenceArticles[slug].title}</h4>
               </article>

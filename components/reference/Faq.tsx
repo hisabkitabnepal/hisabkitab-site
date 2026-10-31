@@ -74,22 +74,31 @@ function Item({
     </div>
   );
 }
-export function Faq() {
+type QA = { question: string; answer: string };
+
+export function Faq({
+  items = questions,
+  heading = "Questions we hear the most",
+  intro = "From the first registration to the final clearance, we handle the paperwork and tell you what matters.",
+  className,
+}: {
+  items?: QA[];
+  heading?: string;
+  intro?: string;
+  className?: string;
+}) {
   const [active, setActive] = useState<number | null>(0);
   return (
-    <section className="faq" id="faq">
+    <section className={"faq" + (className ? " " + className : "")} id="faq">
       <div className="l">
-        <h2 data-split="">Questions we hear the most</h2>
-        <p data-reveal="">
-          From the first registration to the final clearance, we handle the
-          paperwork and tell you what matters.
-        </p>
+        <h2 data-split="">{heading}</h2>
+        <p data-reveal="">{intro}</p>
         <p data-reveal="">
           Not here? Call <a href="tel:+9779747857130">+977 974 785 7130</a>.
         </p>
       </div>
       <div className="r acc-group" data-single="">
-        {questions.map((q, i) => (
+        {items.map((q, i) => (
           <Item
             key={q.question}
             {...q}

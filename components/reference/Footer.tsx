@@ -25,7 +25,7 @@ export function Footer() {
           <h3 className="foot-h">{"Explore"}</h3>
           <ul className="foot-list">
             <li>
-              <a href="/register-business">{"Register a business"}</a>
+              <a href="/guides/business-structures-nepal">{"Register business"}</a>
             </li>
             <li>
               <a href="/services">{"Services"}</a>

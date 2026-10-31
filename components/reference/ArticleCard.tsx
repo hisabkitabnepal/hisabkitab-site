@@ -28,7 +28,7 @@ export function ArticleCard({
         <ArticleIcon slug={slug} />
       </i>
       <small>
-        {article.date} · {article.cat}
+        {article.date}{"\u2003"}{article.cat}
       </small>
       <h4>{article.title}</h4>
       <p>{article.lead}</p>

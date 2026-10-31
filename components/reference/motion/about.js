@@ -1,6 +1,6 @@
 export function aboutMotion({ gsap, ScrollTrigger, rm, scope, context, splitOnce }) {
   if (rm) return;
-  const root = scope.querySelector("#pg-about");
+  const root = scope.querySelector("#pg-about, #pg-register");
   if (!root) return;
   context(() => {
     const q = (s, c) => Array.from((c || root).querySelectorAll(s));

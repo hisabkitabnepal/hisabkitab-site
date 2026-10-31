@@ -1,21 +1,21 @@
 let footerRuns = 0;
-export function entranceMotion({ gsap, ScrollTrigger, rm }, page) {
+export function entranceMotion({ gsap, ScrollTrigger, rm, splitOnce }, page) {
   if (rm) return;
   var clear = "transform,opacity";
   function bookPage() {
     gsap
       .timeline({ defaults: { ease: "power3.out", clearProps: clear } })
       .timeScale(1.5)
-      .from("#pg-book .bk-intro h1", { y: 36, opacity: 0, duration: 0.9 })
+      .from("#pg-book .bk-intro h1", { y: 10, opacity: 0, duration: 0.35 })
       .from(
         "#pg-book .bk-intro p",
-        { y: 24, opacity: 0, duration: 0.8 },
-        "-=.6",
+        { y: 8, opacity: 0, duration: 0.3 },                                  
+        "-=.25",                                                              
       )
       .from(
         "#pg-book form .field, #pg-book form .bk-consent, #pg-book form .bk-btn, #pg-book form .form-msg",
-        { y: 22, opacity: 0, duration: 0.7, stagger: 0.07 },
-        "-=.6",
+        { y: 8, opacity: 0, duration: 0.3, stagger: 0.02 },                   
+        "-=.2",                                                               
       );
   }
   function calcPage() {
@@ -45,16 +45,15 @@ export function entranceMotion({ gsap, ScrollTrigger, rm }, page) {
         "-=.5",
       );
   }
-  function blogPage() {
-    var pg = document.getElementById("pg-blog");
-    if (pg)
-      gsap.from(pg.children, {
-        y: 24,
-        opacity: 0,
-        duration: 0.6,
-        stagger: 0.08,
-        ease: "power3.out",
-        clearProps: clear,
+    function blogPage() {
+    var h = document.querySelector("#pg-blog .bf h1");
+    if (h)
+      gsap.from(splitOnce(h), {
+        yPercent: 115,
+        rotate: 2,
+        duration: 1,
+        stagger: 0.06,
+        ease: "power4.out",
       });
   }
 

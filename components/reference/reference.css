@@ -63,7 +63,7 @@ img {
   --rose: #b5432c;
   --blue: #0a95dc;
   --pad: clamp(20px, 8.8vw, 150px);
-  --art: url("/reference/marbling-embedded.jpg");
+  --art: url("/reference/landing-bg.webp");
   --scrim: linear-gradient(rgba(45, 6, 22, 0.38), rgba(45, 6, 22, 0.38));
   --g-purple: var(--art);
   --g-green: var(--art);
@@ -615,7 +615,8 @@ h2 {
 .track {
   display: flex;
   width: max-content;
-  gap: clamp(2.015rem, 3.61vw, 3.25rem);
+  gap: clamp(3.5rem, 6vw, 6rem);
+  padding-right: clamp(3.5rem, 6vw, 6rem);
   align-items: center;
   white-space: nowrap;
 }
@@ -624,6 +625,19 @@ h2 {
   font-weight: 600;
   letter-spacing: -0.03em;
   color: #4b5563;
+}
+
+.track img {
+  flex: none;
+  height: 2.25rem;
+  width: auto;
+  max-width: none;
+  filter: grayscale(1);
+  opacity: 0.6;
+  transition: opacity 0.3s;
+}
+.track img:hover {
+  opacity: 0.9;
 }
 
 /* SERVICES: scroll showcase (Cerebrium "Why" style) */
@@ -4008,7 +4022,7 @@ section[id] {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 4.5rem;
+  height: 6rem;
   font-size: clamp(18px, 1.9vw, 26px);
   font-weight: 700;
   letter-spacing: -0.035em;
@@ -4017,6 +4031,18 @@ section[id] {
   transition: color 0.35s;
 }
 .abx-logo:hover { color: var(--navy); }
+
+.abx-logo img {
+  height: 3.75rem;
+  width: auto;
+  max-width: 100%;
+  filter: grayscale(1);
+  opacity: 0.6;
+  transition: opacity 0.35s;
+}
+.abx-logo:hover img {
+  opacity: 0.9;
+}
 
 @media (max-width: 900px) {
   .abx-hero-row, .abx-intro { grid-template-columns: 1fr; }
@@ -4169,5 +4195,701 @@ section[id] {
 @media (min-width: 701px) and (max-width: 900px) {
   .sp-stats > div:last-child {
     text-align: right;
+  }
+}
+/* Blog cards: noticeable hover (no movement, no resizing) */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  #pg-blog .bf,
+  #pg-blog .bs article,
+  #pg-blog .bl article[data-slug] i {
+    transition: box-shadow 0.35s ease, border-color 0.35s ease, filter 0.35s ease;
+  }
+  #pg-blog .bf:hover,
+  #pg-blog .bs article:hover,
+  #pg-blog .bl article[data-slug]:hover i {
+    box-shadow: 0 18px 40px -14px rgba(15, 43, 63, 0.55);
+    filter: brightness(1.14) saturate(1.12);
+  }
+  #pg-blog .bs article:hover,
+  #pg-blog .bl article[data-slug]:hover i {
+    border-color: #7f95a8;
+  }
+}
+
+/* Blog grid tiles: no dot overlay */
+#pg-blog .bl i::before {
+  display: none;
+}
+
+.st-sec {
+  margin-top: clamp(64px, 9vw, 128px);
+  scroll-margin-top: 96px;
+}
+.st-head {
+  max-width: 34em;
+  margin-bottom: clamp(28px, 3.4vw, 44px);
+}
+.st-head p {
+  margin-top: 1rem;
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: #55555a;
+}
+.st-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 0.625rem;
+  background: #fff;
+}
+.st-table {
+  width: 100%;
+  min-width: 680px;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+}
+.st-table th,
+.st-table td {
+  padding: 1.125rem clamp(16px, 2vw, 28px);
+  vertical-align: top;
+  border-top: 1px solid var(--line);
+}
+.st-table thead th {
+  border-top: 0;
+  background: var(--soft);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--navy);
+}
+.st-table tbody th {
+  width: 17%;
+  font-weight: 600;
+  color: var(--navy);
+}
+.st-table td {
+  color: #3a3d44;
+}
+.st-table tbody tr {
+  transition: background-color 0.3s ease;
+}
+.st-table tbody tr:hover {
+  background: var(--soft);
+}
+.st-note {
+  max-width: 44em;
+  margin-top: 1.25rem;
+  font-size: 0.8438rem;
+  line-height: 1.6;
+  color: #6b6b78;
+}
+.st-cta {
+  margin-top: clamp(1.008rem, 1.81vw, 1.625rem);
+}
+.st-cta .pill {
+  padding: 0.8125rem clamp(0.93rem, 1.67vw, 1.5rem);
+  font-size: 0.9062rem;
+}
+ 
+/* ===== Business structures guide page (/guides/business-structures-nepal) ===== */
+.bs-page .st-sec:first-of-type {
+  margin-top: 0;
+}
+.bs-top {
+  margin-bottom: clamp(48px, 6vw, 88px);
+}
+.bs-top h1 {
+  max-width: 14em;
+}
+.bs-crumb {
+  margin-bottom: clamp(20px, 2.4vw, 32px);
+  font-size: 0.8438rem;
+  color: #6b6b78;
+}
+.bs-crumb a {
+  color: #6b6b78;
+  text-decoration: none;
+}
+.bs-crumb a:hover {
+  color: var(--navy);
+}
+.bs-meta {
+  margin-top: 1rem;
+  font-size: 0.8438rem;
+  color: #6b6b78;
+}
+.st-eyebrow {
+  margin: 0 0 0.875rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #6b6b78;
+}
+.st-table.bs-slabs {
+  min-width: 0;
+}
+.bs-slabs th:last-child,
+.bs-slabs td:last-child {
+  text-align: right;
+  white-space: nowrap;
+}
+.bs-slabs tbody th {
+  width: auto;
+}
+.bs-faq {
+  border-top: 1px solid var(--line);
+  max-width: 52em;
+}
+.bs-faq details {
+  border-bottom: 1px solid var(--line);
+}
+.bs-faq summary {
+  cursor: pointer;
+  padding: 1.125rem 0;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--navy);
+  list-style: none;
+}
+.bs-faq summary::-webkit-details-marker {
+  display: none;
+}
+.bs-faq details p {
+  padding: 0 0 1.25rem;
+  max-width: 44em;
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: #55555a;
+}
+.bs-ref {
+  margin-top: clamp(48px, 7vw, 96px);
+  padding-top: clamp(20px, 2.4vw, 32px);
+  border-top: 1px solid var(--line);
+  max-width: 44em;
+}
+.bs-ref h3 {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #6b6b78;
+}
+.bs-ref p {
+  margin-top: 0.5rem;
+  font-size: 0.8438rem;
+  line-height: 1.6;
+  color: #6b6b78;
+}
+.bs-ref ul {
+  list-style: none;
+  margin: 0.875rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+.bs-ref li a {
+  font-size: 0.8438rem;
+  line-height: 1.5;
+  color: #6b6b78;
+  text-decoration: underline;
+  text-decoration-color: var(--line);
+  text-underline-offset: 3px;
+  transition: color 0.25s ease, text-decoration-color 0.25s ease;
+}
+.bs-ref li a::after {
+  content: " ↗";
+  font-size: 0.75em;
+}
+.bs-ref li a:hover {
+  color: var(--navy);
+  text-decoration-color: var(--navy);
+}
+.bs-ref .st-cta {
+  margin-top: clamp(1.5rem, 2.4vw, 2rem);
+}
+.bs-page {
+  padding-bottom: 0;
+}
+.bs-page > .st-sec:first-of-type {
+  margin-bottom: clamp(64px, 9vw, 128px);
+}
+.bs-band {
+  margin: 0 calc(-1 * var(--pad));
+  padding: clamp(56px, 7vw, 110px) var(--pad);
+  background: var(--soft);
+  border-top: 1px solid var(--soft-line);
+  max-width: none;
+}
+.bs-faq-sec {
+  margin: 0 calc(-1 * var(--pad));
+}
+.bs-ref.bs-band > * {
+  max-width: 44em;
+}
+.bs-ref.bs-band {
+  margin-top: 0;
+}
+/* ===== Register business page (/guides/business-structures-nepal) ===== */
+.rb-body {
+  padding: 0 var(--pad) clamp(64px, 8vw, 112px);
+}
+.rb-body .st-sec {
+  margin-top: 0;
+}
+.rb-band {
+  background: var(--soft);
+  border-top: 1px solid var(--soft-line);
+  padding-bottom: clamp(8px, 1vw, 16px);
+}
+.rb-band .abx-intro {
+  padding-top: clamp(56px, 7vw, 100px);
+}
+.st-table.bs-slabs {
+  min-width: 0;
+}
+.bs-slabs th:last-child,
+.bs-slabs td:last-child {
+  text-align: right;
+  white-space: nowrap;
+}
+.bs-slabs tbody th {
+  width: auto;
+}
+.rb-sources {
+  padding: clamp(40px, 5vw, 72px) var(--pad) clamp(56px, 7vw, 96px);
+  border-top: 1px solid var(--line);
+}
+.rb-sources h3 {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #6b6b78;
+}
+.rb-sources ul {
+  list-style: none;
+  margin: 0.875rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  max-width: 44em;
+}
+.rb-sources li a {
+  font-size: 0.8438rem;
+  line-height: 1.5;
+  color: #6b6b78;
+  text-decoration: underline;
+  text-decoration-color: var(--line);
+  text-underline-offset: 3px;
+  transition: color 0.25s ease, text-decoration-color 0.25s ease;
+}
+.rb-sources li a::after {
+  content: " ↗";
+  font-size: 0.75em;
+}
+.rb-sources li a:hover {
+  color: var(--navy);
+  text-decoration-color: var(--navy);
+}
+.rb-sources .st-cta {
+  margin-top: clamp(1.5rem, 2.4vw, 2rem);
+}
+/* FAQ heading column scrolls with the page on this route */
+.rb-page .faq .l {
+  position: static;
+}
+
+/* About + Register business hero: use the homepage background art */
+.abx-hero {
+  background: var(--scrim), var(--art) center/cover no-repeat;
+}
+.abx-dots {
+  display: none;
+}
+
+/* ===== Register business: comparison strip + slabs (site font only) ===== */
+.rb-page .rb-lab {
+  font-family: inherit;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1.6;
+  color: #6b6b78;
+}
+.rb-sec {
+  padding: clamp(48px, 6vw, 96px) var(--pad);
+}
+.rb-band-sec {
+  background: var(--soft);
+  border-top: 1px solid var(--line);
+}
+.rb-sech {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 24px 48px;
+  margin-bottom: clamp(28px, 3.4vw, 48px);
+}
+.rb-page .rb-sech h2 {
+  font-size: clamp(30px, 3.8vw, 54px);
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  line-height: 1.04;
+  max-width: 9em;
+  text-wrap: balance;
+}
+.rb-sech > .rb-lab {
+  max-width: 22em;
+  text-align: right;
+}
+.rb-kicker {
+  margin-bottom: 16px;
+}
+@media (max-width: 700px) {
+  .rb-sech > .rb-lab {
+    text-align: left;
+  }
+}
+
+/* comparison strip */
+.rb-cmp {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+}
+.rb-col {
+  display: grid;
+  grid-row: span 8;
+  grid-template-rows: subgrid;
+  border-left: 1px solid var(--line);
+  transition: background-color 0.35s;
+}
+.rb-col:first-child {
+  border-left: 0;
+}
+.rb-col:hover {
+  background: var(--soft);
+}
+.rb-col > * {
+  padding-inline: clamp(16px, 2vw, 28px);
+}
+.rb-band {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-block: 11px;
+  background: #eef1f4;
+  transition: background-color 0.35s, color 0.35s;
+}
+.rb-band .rb-lab {
+  color: var(--navy);
+}
+.rb-col:hover .rb-band {
+  background: #fbe3df;
+}
+.rb-col:hover .rb-band .rb-lab {
+  color: var(--rose);
+}
+.rb-page .rb-say {
+  padding-block: clamp(24px, 3vw, 40px) clamp(20px, 2.4vw, 32px);
+  font-size: clamp(22px, 2vw, 28px);
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  line-height: 1.2;
+  text-wrap: balance;
+}
+.rb-attr {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding-block: 14px;
+  border-top: 1px solid var(--line);
+}
+.rb-attr dt {
+  font-size: 0.6563rem;
+  font-weight: 500;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #6b6b78;
+}
+.rb-attr dd {
+  font-size: 0.9063rem;
+  line-height: 1.55;
+  color: #33363d;
+}
+.rb-stat {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  padding-block: clamp(28px, 4vw, 56px) clamp(24px, 2.6vw, 36px);
+  border-top: 1px solid var(--line);
+}
+.rb-stat b {
+  font-size: clamp(46px, 5.6vw, 80px);
+  font-weight: 300;
+  letter-spacing: -0.05em;
+  line-height: 0.95;
+}
+.rb-stat .rb-lab {
+  max-width: 11em;
+  text-align: right;
+}
+@media (max-width: 900px) {
+  .rb-cmp {
+    grid-template-columns: 1fr;
+  }
+  .rb-col {
+    grid-row: auto;
+    grid-template-rows: none;
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+  .rb-col:first-child {
+    border-top: 0;
+  }
+}
+
+/* slabs */
+.rb-zero {
+  display: flex;
+  align-items: flex-end;
+  gap: 18px;
+}
+.rb-zero b {
+  font-size: clamp(72px, 11vw, 168px);
+  font-weight: 300;
+  letter-spacing: -0.06em;
+  line-height: 0.8;
+  color: var(--rose);
+}
+.rb-zero .rb-lab {
+  max-width: 12em;
+  padding-bottom: 6px;
+}
+.rb-slabs {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+}
+.rb-slab {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.5fr) minmax(0, 1.4fr) auto;
+  gap: clamp(12px, 3vw, 48px);
+  align-items: center;
+  padding-block: clamp(22px, 2.6vw, 34px);
+  border-bottom: 1px solid var(--line);
+  transition: padding-left 0.45s cubic-bezier(0.2, 0.7, 0.2, 1),
+    background-color 0.35s;
+}
+.rb-slab::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  height: 2px;
+  width: var(--w);
+  background: var(--rose);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1.1s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.rb-slabs.in .rb-slab::after {
+  transform: scaleX(1);
+}
+.rb-slab:hover {
+  padding-left: clamp(10px, 1.4vw, 22px);
+  background: linear-gradient(90deg, var(--soft), transparent);
+}
+.rb-tag {
+  justify-self: start;
+  padding: 3px 10px;
+  border: 1px solid #d5d8de;
+  border-radius: 999px;
+  background: #fff;
+  font-size: 0.6563rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #6b6b78;
+  white-space: nowrap;
+}
+.rb-page .rb-slab h3 {
+  font-size: clamp(22px, 2.4vw, 34px);
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+  color: #6b6b78;
+  transition: color 0.3s;
+}
+.rb-slab:hover h3 {
+  color: var(--rose);
+}
+.rb-slab p {
+  max-width: 30em;
+  font-size: 0.8438rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+.rb-rate {
+  min-width: 2.4em;
+  font-size: clamp(34px, 4vw, 60px);
+  font-weight: 300;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+@media (max-width: 800px) {
+  .rb-slab {
+    grid-template-columns: 1fr auto;
+    grid-template-areas: "tag rate" "name rate" "desc desc";
+  }
+  .rb-slab .rb-tag {
+    grid-area: tag;
+  }
+  .rb-slab h3 {
+    grid-area: name;
+  }
+  .rb-slab p {
+    grid-area: desc;
+  }
+  .rb-slab .rb-rate {
+    grid-area: rate;
+    align-self: start;
+  }
+}
+.rb-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: clamp(24px, 3vw, 36px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .rb-slab,
+  .rb-slab::after,
+  .rb-col,
+  .rb-band {
+    transition: none;
+  }
+}
+
+/* ===== Register business v3: smaller navy 0%, links footer ===== */
+.rb-zero b {
+  font-size: clamp(44px, 5.5vw, 84px);
+  color: var(--navy);
+}
+.rb-zero .rb-lab {
+  padding-bottom: 4px;
+}
+.rb-foot {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(24px, 5vw, 80px);
+  margin-top: clamp(36px, 4.4vw, 64px);
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+}
+.rb-foot .rb-actions {
+  margin-top: 0;
+  align-content: flex-start;
+}
+.rb-src ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+  justify-items: start;
+}
+.rb-src a {
+  font-size: 0.8438rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--navy);
+  border-bottom: 1px solid rgba(15, 43, 63, 0.3);
+  transition: border-color 0.3s;
+}
+.rb-src a:hover {
+  border-color: var(--navy);
+}
+@media (max-width: 800px) {
+  .rb-foot {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== Register business v4: navy, calm hover, no band tags ===== */
+.rb-sech h2 {
+  max-width: 12em;
+}
+.rb-col:hover .rb-band {
+  background: #eef1f4;
+}
+.rb-col:hover .rb-band .rb-lab {
+  color: var(--navy);
+}
+.rb-slab {
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.5fr) auto;
+  transition: none;
+}
+.rb-slab::after {
+  background: var(--navy);
+}
+.rb-slab:hover {
+  padding-left: 0;
+  background: transparent;
+}
+.rb-slab:hover h3 {
+  color: var(--navy);
+}
+.rb-page .rb-slab h3 {
+  transition: color 0.2s;
+}
+@media (max-width: 800px) {
+  .rb-slab {
+    grid-template-columns: 1fr auto;
+    grid-template-areas: "name rate" "desc desc";
+  }
+}
+.rb-end {
+  padding: 0 var(--pad) clamp(48px, 6vw, 96px);
+}
+.rb-end .rb-foot {
+  margin-top: 0;
+}
+
+/* ===== Register business v5: smaller section titles, scroll-linked slab lines, end note ===== */
+.rb-page .rb-sech h2,
+.rb-page .faq h2 {
+  font-size: clamp(22px, 2.2vw, 30px) !important;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+.rb-slab::after {
+  transform: scaleX(var(--p, 0));
+  transition: none;
+}
+.rb-note h3 {
+  font-size: 0.875rem !important;
+  font-weight: 600;
+  letter-spacing: 0;
+  color: var(--navy);
+}
+.rb-note p {
+  margin-top: 8px;
+  max-width: 34em;
+  font-size: 0.8438rem;
+  line-height: 1.7;
+  color: #6b6b78;
+}
+@media (prefers-reduced-motion: reduce) {
+  .rb-slab::after {
+    transform: scaleX(1);
   }
 }
