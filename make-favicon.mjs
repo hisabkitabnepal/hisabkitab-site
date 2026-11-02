@@ -2,8 +2,8 @@
 // so the tab icon is visible in both light and dark browser themes.
 import sharp from "sharp";
 
-const SIZE = 256;
-const PAD = 36;
+const SIZE = 192;
+const PAD = 27;
 const emblem = await sharp("public/reference/hk-emblem.webp")
   .resize(SIZE - PAD * 2, SIZE - PAD * 2, {
     fit: "contain",
@@ -13,7 +13,7 @@ const emblem = await sharp("public/reference/hk-emblem.webp")
   .toBuffer();
 
 const bg = Buffer.from(
-  `<svg xmlns="http://www.w3.org/2000/svg" width="${SIZE}" height="${SIZE}"><rect width="${SIZE}" height="${SIZE}" rx="56" fill="#faf9f6"/></svg>`,
+  `<svg xmlns="http://www.w3.org/2000/svg" width="${SIZE}" height="${SIZE}"><rect width="${SIZE}" height="${SIZE}" rx="42" fill="#faf9f6"/></svg>`,
 );
 
 await sharp(bg)
