@@ -8,7 +8,7 @@ export type LegalView = {
   intro: string;
   sections: LegalSection[];
 };
-export const legalUpdated = "27 October 2026";
+export const legalUpdated = "3 November 2026";
 export const legalEmail = "hisabkitabnepal@outlook.com";
 export const legalPhone = { href: "+9779747857130", label: "+977 9747857130" };
 export const legalViews: Record<LegalKey, LegalView> = {
@@ -170,7 +170,7 @@ export const legalViews: Record<LegalKey, LegalView> = {
         "id": "privacy-9",
         "title": "Cookies and similar technologies",
         "body": [
-          "Cookies and similar technologies can store information on your device or support Website functions. Your browser settings allow you to review, block or delete cookies; restricting them may affect Website features. Where we introduce analytics, advertising or other tracking that requires additional notice or consent, we will provide the relevant information and obtain consent before such tracking where required. This section does not authorise undisclosed tracking or use of information for unrelated advertising."
+          "Cookies and similar technologies can store information on your device or support Website functions. Your browser settings allow you to review, block or delete cookies; restricting them may affect Website features. We use Google Analytics, through Google Tag Manager, to understand how visitors use the Website, such as which pages are viewed, how visitors arrive and the approximate location, device and browser they use. Google Analytics uses cookies and similar identifiers for this purpose, and the information is processed by Google under its own terms. You can block cookies in your browser settings or use Google's opt-out browser add-on. We do not use this information for advertising. This section does not authorise undisclosed tracking or use of information for unrelated advertising."
         ]
       },
       {
