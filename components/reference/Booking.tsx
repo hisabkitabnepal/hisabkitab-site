@@ -4,6 +4,7 @@ import { whatsapp } from "@/lib/business";
 import { services } from "@/lib/services";
 import { plans } from "@/lib/plans";
 import { resolveReferenceBookingQuery } from "@/lib/reference/booking";
+import { sendGTMEvent } from "@next/third-parties/google";
 
 type Fields = {
   name: string;
@@ -103,6 +104,7 @@ export function Booking({
       });
       return;
     }
+    sendGTMEvent({ event: "booking_submit" });
     const form = formRef.current;
     const pick = (n: string) =>
       (form?.elements.namedItem(n) as HTMLSelectElement | null)?.value ?? "";
